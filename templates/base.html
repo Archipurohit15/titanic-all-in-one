@@ -1,0 +1,63 @@
+<!-- navbar -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Titanic — All in One Store{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <span class="logo-text">TITAN<span class="logo-accent">IC<span class="logo-dot"></span></span></span>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Search products...">
+        <button class="search-btn"><i class="ti ti-search"></i></button>
+    </div>
+
+    <div class="nav-actions">
+        <div class="agent-btn">
+            <i class="ti ti-users-plus"></i>
+            <span>Join as Agent</span>
+        </div>
+
+        <div class="nav-divider"></div>
+
+        <a href="#" class="nav-icon-btn">
+            <i class="ti ti-user"></i>
+        </a>
+        <a href="#" class="nav-icon-btn">
+            <i class="ti ti-shopping-cart"></i>
+            <span class="cart-badge">0</span>
+        </a>
+    </div>
+</nav>  
+
+
+<div class="category-bar">
+    <div class="cat-all">
+        <i class="ti ti-menu-2"></i>
+        <span>All</span>
+    </div>
+    <a href="#" class="cat-link">FMCG</a>
+    <a href="#" class="cat-link">Groceries</a>
+    <a href="#" class="cat-link active">Electronics</a>
+    <a href="#" class="cat-link">Electrical</a>
+</div>
+
+
+    {% block content %}
+    {% endblock %}
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Titanic — All in One Store, Jaisalmer</p>
+    </footer>
+
+</body>
+</html>

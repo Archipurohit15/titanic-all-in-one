@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'products/product_list.css' %}">
+
+<!-- HERO SECTION -->
+
+<!-- <section class="hero">
+    <div class="hero-bubble bubble-1"></div>
+    <div class="hero-bubble bubble-2"></div>
+    <div class="hero-bubble bubble-3"></div>
+
+    <div class="hero-text">
+        <div class="hero-tag">
+            <i class="ti ti-map-pin"></i>
+            <span>Delivering across Jaisalmer</span>
+        </div>
+        <h1>Everything you need, delivered locally</h1>
+        <p>From daily groceries to electronics — one store, delivered fast across Jaisalmer.</p>
+        <div class="hero-cta">Start Shopping</div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="hero-card">
+            <img src="C:\Users\archi\Downloads\Gemini_Generated_Image_nk6ilhnk6ilhnk6i.png" alt="market">
+        </div>
+    </div>
+</section> -->
+
+
+<section class="hero hero-photo">
+    <div class="hero-overlay"></div>
+    <div class="hero-fade-bottom"></div>
+    <div class="hero-text">
+        <div class="hero-tag">
+            <i class="ti ti-map-pin"></i>
+            <span>Delivering across Jaisalmer</span>
+        </div>
+        <h1>Everything you need, delivered locally</h1>
+        <p>From daily groceries to electronics — one store, delivered fast across Jaisalmer.</p>
+        <div class="hero-cta">Start Shopping</div>
+    </div>
+</section>
+
+
+<div class="page-header">
+    <p class="eyebrow">Popular near you</p>
+</div>
+
+<div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+        <div class="product-image">📦</div>
+        <div class="product-info">
+            <p class="product-name">{{ product.name }}</p>
+            <p class="product-price">₹{{ product.price }}</p>
+            <button class="add-btn">Add to cart</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

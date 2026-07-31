@@ -1,9 +1,9 @@
 
 from django.contrib import admin
-from .models import Category, Product
+from .models import Categories, Product
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+@admin.register(Categories)
+class CategoriesAdmin(admin.ModelAdmin):
     list_display = ('name', 'parent', 'commission_percent')
     search_fields = ('name',)
 

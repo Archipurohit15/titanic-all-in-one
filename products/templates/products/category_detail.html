@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'products/product_list.css' %}">
+
+<div class="category-section">
+    <div class="section-header">
+        <h2>{{ category.name }}</h2>
+    </div>
+
+    <div class="subcat-chips">
+        {% for sub in subcategories %}
+        <span class="chip">{{ sub.name }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="product-grid" style="margin-top: 20px;">
+        {% for product in products %}
+        <div class="product-card">
+            <div class="product-image">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    📦
+                {% endif %}
+            </div>
+            <div class="product-info">
+                <p class="product-name">{{ product.name }}</p>
+                <p class="product-price">₹{{ product.price }}</p>
+                <button class="add-btn">Add to cart</button>
+            </div>
+        </div>
+        {% empty %}
+        <p>Abhi is category mein koi product nahi hai.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

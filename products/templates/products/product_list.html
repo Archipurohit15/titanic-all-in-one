@@ -6,29 +6,6 @@
 
 <!-- HERO SECTION -->
 
-<!-- <section class="hero">
-    <div class="hero-bubble bubble-1"></div>
-    <div class="hero-bubble bubble-2"></div>
-    <div class="hero-bubble bubble-3"></div>
-
-    <div class="hero-text">
-        <div class="hero-tag">
-            <i class="ti ti-map-pin"></i>
-            <span>Delivering across Jaisalmer</span>
-        </div>
-        <h1>Everything you need, delivered locally</h1>
-        <p>From daily groceries to electronics — one store, delivered fast across Jaisalmer.</p>
-        <div class="hero-cta">Start Shopping</div>
-    </div>
-
-    <div class="hero-visual">
-        <div class="hero-card">
-            <img src="C:\Users\archi\Downloads\Gemini_Generated_Image_nk6ilhnk6ilhnk6i.png" alt="market">
-        </div>
-    </div>
-</section> -->
-
-
 <section class="hero hero-photo">
     <div class="hero-overlay"></div>
     <div class="hero-fade-bottom"></div>
@@ -44,20 +21,80 @@
 </section>
 
 
-<div class="page-header">
-    <p class="eyebrow">Popular near you</p>
-</div>
 
-<div class="product-grid">
-    {% for product in products %}
-    <div class="product-card">
-        <div class="product-image">📦</div>
-        <div class="product-info">
-            <p class="product-name">{{ product.name }}</p>
-            <p class="product-price">₹{{ product.price }}</p>
-            <button class="add-btn">Add to cart</button>
+<!-- shop by categories  -->
+
+<section class="shop-by-category">
+    <div class="sbc-heading">
+        <div class="sbc-line"></div>
+        <div>
+            <h2>Shop by Category</h2>
+            <p>Explore products across all categories</p>
+        </div>
+        <div class="sbc-line"></div>
+    </div>
+
+    <div class="sbc-grid">
+        <div class="sbc-card sbc-fmcg">
+            <h3>FMCG</h3>
+            <!-- <p class="sbc-count">100+ Products</p> -->
+            <div class="sbc-img"> <img src="{% static 'products/fmcg.png' %}" alt="FMCG"> </div>
+            <a href="#" class="sbc-btn">Shop FMCG <i class="ti ti-arrow-right"></i></a>
+        </div>
+
+        <div class="sbc-card sbc-groceries">
+            <h3>Groceries</h3>
+            <!-- <p class="sbc-count">200+ Products</p> -->
+            <div class="sbc-img"><img src="{% static 'products/groceries.png' %}" alt="Groceries"></div>
+            <a href="#" class="sbc-btn">Shop Groceries <i class="ti ti-arrow-right"></i></a>
+        </div>
+
+        <div class="sbc-card sbc-electronics">
+            <h3>Electronics</h3>
+            <!-- <p class="sbc-count">80+ Products</p> -->
+            <div class="sbc-img"><img src="{% static 'products/electronics.png' %}" alt="   Electronics"></div>
+            <a href="#" class="sbc-btn">Shop Electronics <i class="ti ti-arrow-right"></i></a>
+        </div>
+
+        <div class="sbc-card sbc-electricals">
+            <h3>Electricals</h3>
+            <!-- <p class="sbc-count">120+ Products</p> -->
+            <div class="sbc-img"><img src="{% static 'products/electricals.png' %}" alt="Electricals"></div>
+            <a href="#" class="sbc-btn">Shop Electricals <i class="ti ti-arrow-right"></i></a>
         </div>
     </div>
-    {% endfor %}
+</section>
+
+<!-- product list -->
+
+{% for section in sections %}
+<div class="category-section">
+    <div class="section-header">
+        <h2>{{ section.category.name }}</h2>
+        <a href="{% url 'category_detail' section.category.id %}" class="view-all">View all <i class="ti ti-arrow-right"></i></a>
+        <!-- <a href="#" class="view-all">View all <i class="ti ti-arrow-right"></i></a> -->
+    </div>
+    <div class="product-grid">
+        {% for product in section.products %}
+        <div class="product-card">
+            <div class="product-image">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% elif product.auto_image_url %}
+                    <img src="{{ product.auto_image_url }}" alt="{{ product.name }}">
+                {% else %}
+                    📦
+                {% endif %}
+            </div>
+            <div class="product-info">
+                <p class="product-name">{{ product.name }}</p>
+                <p class="product-price">₹{{ product.price }}</p>
+                <button class="add-btn">Add to cart</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
+{% endfor %}
+
 {% endblock %}

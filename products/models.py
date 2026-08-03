@@ -11,9 +11,17 @@ class Categories(models.Model):
         related_name='children', on_delete=models.CASCADE
     )
     commission_percent = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    image = models.ImageField(upload_to='categories/', blank=True, null=True)
+    auto_image_url = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.image and not self.auto_image_url:
+            self.auto_image_url = fetch_image_for(self.name)
+        super().save(*args, **kwargs)
+
 
 
 # products class - saari product details store karega 

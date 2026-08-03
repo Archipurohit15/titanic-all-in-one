@@ -1,28 +1,26 @@
-from django.shortcuts import render,get_object_or_404
-from .models import Product,Categories
-# Create your views here.
-
+from django.shortcuts import render, get_object_or_404
+from .models import Product, Categories
 
 def product_list(request):
     top_categories = Categories.objects.filter(parent=None)
     sections = []
     for cat in top_categories:
-        products = Product.objects.filter(category__parent=cat)[:4]
-        if products.exists():
-            sections.append({'category': cat, 'products': products})
+        groups = cat.children.all()
+        if groups.exists():
+            sections.append({'department': cat, 'groups': groups})
     return render(request, 'products/product_list.html', {'sections': sections})
 
 
-def base(request):
-    return render(request,'base.html')
-
-
 def category_detail(request, category_id):
-    category = get_object_or_404(Categories, id=category_id, parent=None)
-    subcategories = category.children.all()
-    products = Product.objects.filter(category__parent=category)
+    department = get_object_or_404(Categories, id=category_id, parent=None)
+    groups = department.children.all()
+
+    group_sections = []
+    for group in groups:
+        products = Product.objects.filter(category__parent=group)
+        group_sections.append({'group': group, 'products': products})
+
     return render(request, 'products/category_detail.html', {
-        'category': category,
-        'subcategories': subcategories,
-        'products': products,
+        'department': department,
+        'group_sections': group_sections,
     })

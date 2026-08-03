@@ -69,29 +69,32 @@
 
 {% for section in sections %}
 <div class="category-section">
+<!-- <div class="category-section {% if section.groups.count < 5 %}compact{% endif %}"> -->
     <div class="section-header">
-        <h2>{{ section.category.name }}</h2>
-        <a href="{% url 'category_detail' section.category.id %}" class="view-all">View all <i class="ti ti-arrow-right"></i></a>
-        <!-- <a href="#" class="view-all">View all <i class="ti ti-arrow-right"></i></a> -->
-    </div>
-    <div class="product-grid">
-        {% for product in section.products %}
-        <div class="product-card">
-            <div class="product-image">
-                {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                {% elif product.auto_image_url %}
-                    <img src="{{ product.auto_image_url }}" alt="{{ product.name }}">
-                {% else %}
-                    📦
-                {% endif %}
-            </div>
-            <div class="product-info">
-                <p class="product-name">{{ product.name }}</p>
-                <p class="product-price">₹{{ product.price }}</p>
-                <button class="add-btn">Add to cart</button>
-            </div>
+        <div>
+            <h2>Shop by {{ section.department.name }}</h2>
+            <p class="section-sub">Explore {{ section.department.name }} essentials</p>
         </div>
+        <a href="{% url 'category_detail' section.department.id %}" class="view-all">View all <i class="ti ti-arrow-right"></i></a>
+    </div>
+    <div class="group-scroll">
+        {% for group in section.groups %}
+        <a href="{% url 'category_detail' section.department.id %}" class="group-item">
+<div class="group-img">
+    {% if group.image %}
+        <img src="{{ group.image.url }}" alt="{{ group.name }}">
+    {% elif group.auto_image_url %}
+        <img src="{{ group.auto_image_url }}" alt="{{ group.name }}">
+    {% else %}
+        <span style="font-size: 32px;">📦</span>
+    {% endif %}
+</div>
+            
+                
+                
+            
+            <span>{{ group.name }}</span>
+        </a>
         {% endfor %}
     </div>
 </div>

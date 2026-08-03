@@ -1,76 +1,83 @@
-from django.core.management import BaseCommand
+from django.core.management.base import BaseCommand
 from products.models import Categories
 
 CATEGORY_DATA = {
     "FMCG": {
-        "commission":2,
-        "items": [
-            "Soap", "Hair Oil", "Perfume", "Face Wash", "Hand Wash", "Diaper",
-            "Tooth Paste", "Hair Colour", "Medical Items", "Nutrition Items",
-            "Shampoo", "Deodorant", "Body Lotion", "Body Wash", "Sanitary Pad",
-            "Talcum Powder", "Tooth Brush", "Face Cream", "Agarbatti",
-            "Fabric Items", "Shaving Items", "Detergent Powder", "Cleaning Items",
-            "Cosmetics", "Face Serum", "Battery/Cell", "Blade", "Baby Care",
-            "Room Freshener", "Liquid Detergent", "Gift Items", "Dish Wash Bar",
-            "Dish Wash Liquid", "Coil", "All Out", "Scrubber",
-        ],
+        "commission": 6,
+        "groups": {
+            "Bath & Body": ["Soap", "Body Wash", "Body Lotion", "Talcum Powder", "Scrubber", "Deodorant", "Perfume"],
+            "Hair Care": ["Shampoo", "Hair Oil", "Hair Colour"],
+            "Oral Care": ["Tooth Paste", "Tooth Brush"],
+            "Skin Care": ["Face Wash", "Face Cream", "Face Serum", "Cosmetics"],
+            "Baby Care": ["Diaper", "Baby Care"],
+            "Feminine Hygiene": ["Sanitary Pad"],
+            "Health & Nutrition": ["Medical Items", "Nutrition Items"],
+            "Shaving": ["Shaving Items", "Blade"],
+            "Laundry Care": ["Detergent Powder", "Liquid Detergent", "Fabric Items"],
+            "Home Cleaning": ["Hand Wash", "Cleaning Items", "Dish Wash Bar", "Dish Wash Liquid"],
+            "Home Care": ["Coil", "All Out", "Room Freshener", "Agarbatti"],
+            "Other": ["Battery/Cell", "Gift Items"],
+        },
     },
     "Groceries": {
-        "commission":2,
-        "items": [
-            "Biscuits", "Noodles", "Namkeen", "Papad", "Coffee", "Jam", "Pasta",
-            "Milk Product", "Chips", "Toffee", "Wafers", "Candy", "Beverages",
-            "Corn Flakes", "Muesli", "Pickles", "Ketchup", "Honey", "Masale",
-            "Oats", "Cereal", "Custard Powder", "Tea/Chai-Pati", "Mayonnaise",
-            "Dry Fruit", "Besan/Salt", "Energy Drink", "Poha", "Juices",
-            "Cookies", "Cold Drink", "Soup", "Chilli Sauces", "Flour", "Suji",
-        ],
+        "commission": 2,
+        "groups": {
+            "Snacks & Namkeen": ["Biscuits", "Namkeen", "Papad", "Chips", "Wafers", "Cookies"],
+            "Sweets & Spreads": ["Toffee", "Candy", "Jam", "Honey"],
+            "Breakfast & Cereals": ["Corn Flakes", "Muesli", "Oats", "Cereal", "Poha"],
+            "Noodles, Pasta & Ready-to-Cook": ["Noodles", "Pasta", "Custard Powder", "Soup"],
+            "Beverages": ["Coffee", "Tea/Chai-Pati", "Beverages", "Energy Drink", "Juices", "Cold Drink"],
+            "Atta & Staples": ["Flour", "Suji", "Besan/Salt", "Dry Fruit"],
+            "Sauces, Pickles & Masale": ["Pickles", "Ketchup", "Chilli Sauces", "Mayonnaise", "Masale"],
+            "Dairy": ["Milk Product"],
+        },
     },
     "Electronics": {
-        "commission":3,
-        "items": [
-            "LED TV", "Air Conditioner", "Home Theatre", "Chimney", "Gas Stove",
-            "Hand Blender", "Iron", "Sandwich & Grill Toaster", "Stabilizer",
-            "Electric Kettle", "Personal Groomer", "Geyser", "Water RO",
-            "Microwave Oven", "Mixer Grinder", "Juicer Mixer Grinder",
-            "Air Fryer", "Cooler", "Refrigerator",
-        ],
+        "commission": 4,
+        "groups": {
+            "Large Appliances": ["LED TV", "Air Conditioner", "Refrigerator", "Cooler", "Geyser", "Water RO", "Home Theatre"],
+            "Kitchen Appliances": ["Gas Stove", "Chimney", "Microwave Oven", "Mixer Grinder", "Juicer Mixer Grinder", "Hand Blender", "Sandwich & Grill Toaster", "Air Fryer"],
+            "Personal Care & Others": ["Personal Groomer", "Iron", "Stabilizer"],
+        },
     },
     "Electrical": {
-        "commission":3,
-        "items": [
-            "Exhaust Fan (PVC & Metal)", "Table Fan", "Ceiling Fan",
-            "Monobloc Pump", "Jhoomar (Chandelier)", "Wall Light",
-            "Gate Light", "Mirror Light", "POP Light",
-        ],
+        "commission": 5,
+        "groups": {
+            "Fans & Ventilation": ["Table Fan", "Ceiling Fan", "Exhaust Fan (PVC & Metal)"],
+            "Pumps": ["Monobloc Pump"],
+            "Lighting": ["Jhoomar (Chandelier)", "Wall Light", "Gate Light", "Mirror Light", "POP Light"],
+        },
     },
 }
 
 
-
 class Command(BaseCommand):
-    help = "Loads Titanic's initial category + subcategory structure" 
-
+    help = "Loads Titanic's 3-level category structure: Department > Group > Item"
 
     def handle(self, *args, **kwargs):
-
-        for parent_name, data in CATEGORY_DATA.items():
-            parent, created = Categories.objects.get_or_create(
-                name=parent_name,
+        for dept_name, dept_data in CATEGORY_DATA.items():
+            dept, _ = Categories.objects.get_or_create(
+                name=dept_name,
                 parent=None,
-                defaults={"commission_percent": data["commission"]},
+                defaults={"commission_percent": dept_data["commission"]},
             )
-            status = "Created" if created else "Already exists"
-            self.stdout.write(f"{status}: {parent_name}")
+            self.stdout.write(f"Department: {dept_name}")
 
-
-            for item_name in data["items"]:
-                sub, sub_created = Categories.objects.get_or_create(
-                    name=item_name,
-                    parent=parent,
-                    defaults={"commission_percent": data["commission"]},
+            for group_name, items in dept_data["groups"].items():
+                group, _ = Categories.objects.get_or_create(
+                    name=group_name,
+                    parent=dept,
+                    defaults={"commission_percent": dept_data["commission"]},
                 )
-                if sub_created:
-                    self.stdout.write(f"  + {item_name}")
+                self.stdout.write(f"  Group: {group_name}")
 
-            self.stdout.write(self.style.SUCCESS("Done loading categories."))
+                for item_name in items:
+                    item, item_created = Categories.objects.get_or_create(
+                        name=item_name,
+                        parent=group,
+                        defaults={"commission_percent": dept_data["commission"]},
+                    )
+                    if item_created:
+                        self.stdout.write(f"    + {item_name}")
+
+        self.stdout.write(self.style.SUCCESS("Done loading 3-level categories."))

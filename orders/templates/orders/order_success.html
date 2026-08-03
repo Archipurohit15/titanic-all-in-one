@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'orders/order_success.css' %}">
+
+<div class="success-wrap">
+
+    <div class="success-header">
+        <div class="confetti">
+        <span class="c c1">✦</span>
+        <span class="c c2">✧</span>
+        <span class="c c3">✦</span>
+        <span class="c c4">✧</span>
+        <span class="c c5">✦</span>
+        <span class="c c6">✧</span>
+        <span class="c c7">✦</span>
+        <span class="c c8">✧</span>
+        <span class="c c9">✦</span>
+        <span class="c c10">✧</span>
+    </div>
+        <div class="success-icon">✓</div>
+        <h2>Order Successful!</h2>
+        <p>Thank you for shopping with Titanic.</p>
+        <div class="order-id-badge">Order ID: #TIT{{ order.id }}</div>
+    </div>
+
+    <div class="cards-row">
+
+        <div class="info-card">
+            <h3>Order Summary</h3>
+            {% for item in order.items.all %}
+
+               <div class="item-row">
+    <div class="item-left">
+        <div class="item-img">
+            {% if item.product.image %}
+                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+            {% elif item.product.auto_image_url %}
+                <img src="{{ item.product.auto_image_url }}" alt="{{ item.product.name }}">
+            {% else %}
+                <span>📦</span>
+            {% endif %}
+        </div>
+        <div>
+            <p class="item-name">{{ item.product.name }}</p>
+            <p class="item-qty">Qty: {{ item.quantity }}</p>
+        </div>
+    </div>
+    <p class="item-price">₹{{ item.price_at_purchase }}</p>
+</div>
+            {% endfor %}
+            <div class="total-row">
+                <span>Total Amount</span>
+                <span>₹{{ total }}</span>
+            </div>
+        </div>
+
+
+        <div class="info-card">
+            <h3>Order Details</h3>
+            <div class="detail-row">
+                <span>Order ID</span>
+                <span>#TIT{{ order.id }}</span>
+            </div>
+            <div class="detail-row">
+                <span>Order Date</span>
+                <span>{{ order.created_at|date:"d M Y, h:i A" }}</span>
+            </div>
+            <div class="detail-row">
+                <span>Status</span>
+                <span class="status-pending">{{ order.status|capfirst }}</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <p class="address-label">Delivery Address</p>
+            <p class="address-text">
+                {{ order.full_name }}<br>
+                {{ order.address }}, {{ order.pincode }}<br>
+                +91 {{ order.phone }}
+            </p>
+        </div>
+
+    </div>
+
+    <div class="next-steps">
+        <h3>What happens next?</h3>
+        <div class="steps-row">
+            <div class="step">
+                <div class="step-icon">📋</div>
+                <p>Order Confirmed</p>
+                <p>We've received your order and it is confirmed.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">📦</div>
+                <p>Processing</p>
+                <p>We are processing your order now.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">🚚</div>
+                <p>Shipped</p>
+                <p>Your order will be shipped soon.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">🏠</div>
+                <p>Delivered</p>
+                <p>Your order will be delivered to your doorstep.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="continue-wrap">
+        <a href="/" class="continue-btn">Continue Shopping →</a>
+    </div>
+
+</div>
+{% endblock %}

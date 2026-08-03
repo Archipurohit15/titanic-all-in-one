@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div style="max-width:900px; margin:0 auto; padding:32px 24px;">
+
+    <h2 style="font-size:24px; font-weight:700; margin-bottom:24px; color:#1a1a1a;">Checkout</h2>
+
+    <form method="POST" style="display:flex; gap:24px; flex-wrap:wrap;">
+        {% csrf_token %}
+
+        <!-- Left: address form -->
+        <div style="flex:2; min-width:300px; background:#fff; border:1px solid #eee0cc; border-radius:14px; padding:22px;">
+            <h3 style="font-size:16px; font-weight:700; margin-bottom:16px;">Delivery details</h3>
+
+            <div style="margin-bottom:14px;">
+                <label style="display:block; font-size:13px; font-weight:600; margin-bottom:6px;">Full name</label>
+                <input type="text" name="full_name" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px;">
+            </div>
+
+            <div style="margin-bottom:14px;">
+                <label style="display:block; font-size:13px; font-weight:600; margin-bottom:6px;">Phone</label>
+                <input type="text" name="phone" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px;">
+            </div>
+
+            <div style="margin-bottom:14px;">
+                <label style="display:block; font-size:13px; font-weight:600; margin-bottom:6px;">Address</label>
+                <textarea name="address" required rows="3" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px;"></textarea>
+            </div>
+
+            <div style="margin-bottom:14px;">
+                <label style="display:block; font-size:13px; font-weight:600; margin-bottom:6px;">Pincode</label>
+                <input type="text" name="pincode" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px;">
+            </div>
+
+            <div style="margin-bottom:4px;">
+                <label style="display:block; font-size:13px; font-weight:600; margin-bottom:6px;">Referred by agent (optional)</label>
+                <select name="agent" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px;">
+                    <option value="">-- Select agent (if any) --</option>
+                    {% for agent in agents %}
+                        <option value="{{ agent.id }}">{{ agent.name }} ({{ agent.referral_code }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <!-- Right: order summary -->
+        <div style="flex:1; min-width:260px; background:#fdf6ed; border:1px solid #eee0cc; border-radius:14px; padding:22px; height:fit-content;">
+            <h3 style="font-size:16px; font-weight:700; margin-bottom:16px;">Order summary</h3>
+
+            {% for item in items %}
+            <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:8px;">
+                <span>{{ item.product.name }} × {{ item.quantity }}</span>
+                <span>₹{{ item.subtotal }}</span>
+            </div>
+            {% endfor %}
+
+            <div style="border-top:1px dashed #d8c9a3; margin:14px 0;"></div>
+
+            <div style="display:flex; justify-content:space-between; font-size:17px; font-weight:700; margin-bottom:20px;">
+                <span>Total</span>
+                <span>₹{{ total }}</span>
+            </div>
+
+            <button type="submit" style="width:100%; background:#E8A33D; color:#1a1a1a; font-weight:700; padding:13px; border:none; border-radius:10px; cursor:pointer;">
+                Place order
+            </button>
+        </div>
+
+    </form>
+</div>
+{% endblock %}

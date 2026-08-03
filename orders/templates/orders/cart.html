@@ -100,7 +100,10 @@
                 <span class="summary-total-amount">₹{{ total }}</span>
             </div>
 
-            <a href="#" class="checkout-btn">Proceed to Checkout <i class="ti ti-arrow-right"></i></a>
+            <!-- <a href="#" class="checkout-btn">Proceed to Checkout <i class="ti ti-arrow-right"></i></a> -->
+            <a href="{% url 'checkout' %}" style="display:block; text-align:center; background:#E8A33D; color:#1a1a1a; font-weight:700; padding:13px; border-radius:10px; text-decoration:none;">
+    Proceed to Checkout
+</a>
             <p class="summary-secure-note"><i class="ti ti-lock"></i> Safe and secure payments</p>
         </div>
         {% endif %}

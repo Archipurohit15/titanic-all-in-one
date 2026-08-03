@@ -1,7 +1,7 @@
 from django.db import models
 from products.models import Product
+from agents.models import Agent
 
-# Create your models here.
 
 class Order(models.Model):
     STATUS_CHOICES = [
@@ -10,6 +10,11 @@ class Order(models.Model):
         ('shipped', 'Shipped'),
         ('delivered', 'Delivered'),
     ]
+    full_name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=15)
+    address = models.TextField()
+    pincode = models.CharField(max_length=10)
+    referred_by = models.ForeignKey(Agent, null=True, blank=True, on_delete=models.SET_NULL)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
 

@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'orders/cart.css' %}">
+
+<div class="cart-page">
+    <div class="cart-header">
+        <div class="cart-header-left">
+            <div class="cart-icon-badge"><i class="ti ti-shopping-bag"></i></div>
+            <div>
+                <h1>Your Cart</h1>
+                <p>Review your items and proceed to checkout.</p>
+            </div>
+        </div>
+        <div class="secure-tag"><i class="ti ti-shield-check"></i> 100% Secure Payments</div>
+    </div>
+
+    <div class="cart-layout">
+        <div class="cart-table-wrap">
+            {% if items %}
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>
+                            <div class="cart-product">
+                                <div class="cart-product-img">
+                                    {% if item.product.image %}
+                                        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                                    {% elif item.product.auto_image_url %}
+                                        <img src="{{ item.product.auto_image_url }}" alt="{{ item.product.name }}">
+                                    {% else %}
+                                        📦
+                                    {% endif %}
+                                </div>
+                                <div>
+                                    <p class="cart-product-name">{{ item.product.name }}</p>
+                                    <span class="cart-product-tag">{{ item.product.category.name }}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>₹{{ item.product.price }}</td>
+                        <td>
+                            <div class="qty-stepper">
+                                <a href="{% url 'decrease_quantity' item.product.id %}">−</a>
+                                <span>{{ item.quantity }}</span>
+                                <a href="{% url 'increase_quantity' item.product.id %}">+</a>
+                            </div>
+                        </td>
+                        <td class="cart-total-cell">₹{{ item.subtotal }}</td>
+                        <td>
+                            <a href="{% url 'remove_from_cart' item.product.id %}" class="cart-delete"><i class="ti ti-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="cart-actions-row">
+                <a href="{% url 'product_list' %}" class="continue-shopping"><i class="ti ti-arrow-left"></i> Continue Shopping</a>
+                <a href="{% url 'clear_cart' %}" class="clear-cart"><i class="ti ti-trash"></i> Clear Cart</a>
+            </div>
+            {% else %}
+            <p class="empty-cart">Cart khali hai.</p>
+            <a href="{% url 'product_list' %}" class="continue-shopping"><i class="ti ti-arrow-left"></i> Continue Shopping</a>
+            {% endif %}
+        </div>
+
+        {% if items %}
+        <div class="order-summary-card">
+            <div class="summary-heading">
+                <div class="cart-icon-badge small"><i class="ti ti-shopping-bag"></i></div>
+                <h3>Order Summary</h3>
+            </div>
+
+            <div class="summary-row">
+                <span>Subtotal ({{ item_count }} items)</span>
+                <span>₹{{ total }}</span>
+            </div>
+            <div class="summary-row">
+                <span>Delivery Charges</span>
+                <span>—</span>
+            </div>
+
+            <div class="summary-total-row">
+                <div>
+                    <span class="summary-total-label">Total Amount</span>
+                    <p class="summary-total-note">(Inclusive of all taxes)</p>
+                </div>
+                <span class="summary-total-amount">₹{{ total }}</span>
+            </div>
+
+            <a href="#" class="checkout-btn">Proceed to Checkout <i class="ti ti-arrow-right"></i></a>
+            <p class="summary-secure-note"><i class="ti ti-lock"></i> Safe and secure payments</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

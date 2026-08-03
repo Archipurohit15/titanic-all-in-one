@@ -32,9 +32,11 @@
         <a href="#" class="nav-icon-btn">
             <i class="ti ti-user"></i>
         </a>
-        <a href="#" class="nav-icon-btn">
+
+        <a href="{% url 'view_cart' %}" class="nav-icon-btn">
             <i class="ti ti-shopping-cart"></i>
-            <span class="cart-badge">0</span>
+            <!-- <span class="cart-badge">{{ request.session.cart|length }}</span> -->
+            <span class="cart-badge" id="cart-badge">{{ request.session.cart|length }}</span>
         </a>
     </div>
 </nav>  
@@ -51,6 +53,7 @@
     <a href="#" class="cat-link">Electrical</a>
 </div>
 
+<div id="toast" class="toast"></div>
 
     {% block content %}
     {% endblock %}
@@ -59,5 +62,35 @@
         <p>&copy; 2026 Titanic — All in One Store, Jaisalmer</p>
     </footer>
 
+
+<script>
+document.addEventListener('click', function (e) {
+    const link = e.target.closest('.add-btn, .step-btn');
+    if (!link || !link.closest('.cart-control')) return;
+    e.preventDefault();
+
+    fetch(link.href, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+        .then(res => res.json())
+        .then(data => {
+            const control = link.closest('.cart-control');
+            if (data.quantity > 0) {
+                control.innerHTML = `
+                    <div class="stepper">
+                        <a href="/cart/decrease/${control.dataset.productId}/" class="step-btn dec">−</a>
+                        <span class="qty-val">${data.quantity}</span>
+                        <a href="/cart/increase/${control.dataset.productId}/" class="step-btn inc">+</a>
+                    </div>`;
+            } else {
+                control.innerHTML = `<a href="/cart/add/${control.dataset.productId}/" class="add-btn">Add to cart</a>`;
+            }
+            document.getElementById('cart-badge').textContent = data.cart_count;
+
+            const toast = document.getElementById('toast');
+            toast.textContent = 'Product added to cart';
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 1800);
+        });
+});
+</script>
 </body>
 </html>

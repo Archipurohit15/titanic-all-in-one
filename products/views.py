@@ -14,10 +14,13 @@ def product_list(request):
 def category_detail(request, category_id):
     department = get_object_or_404(Categories, id=category_id, parent=None)
     groups = department.children.all()
+    cart = request.session.get('cart', {})
 
     group_sections = []
     for group in groups:
-        products = Product.objects.filter(category__parent=group)
+        products = list(Product.objects.filter(category__parent=group))
+        for p in products:
+            p.cart_qty = cart.get(str(p.id), 0)
         group_sections.append({'group': group, 'products': products})
 
     return render(request, 'products/category_detail.html', {

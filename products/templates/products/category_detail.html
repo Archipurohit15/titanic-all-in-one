@@ -30,7 +30,18 @@
             <div class="product-info">
                 <p class="product-name">{{ product.name }}</p>
                 <p class="product-price">₹{{ product.price }}</p>
-                <button class="add-btn">Add to cart</button>
+                <!-- <button class="add-btn">Add to cart</button> -->
+                 <div class="cart-control" data-product-id="{{ product.id }}">
+    {% if product.cart_qty > 0 %}
+        <div class="stepper">
+            <a href="{% url 'decrease_quantity' product.id %}" class="step-btn dec">−</a>
+            <span class="qty-val">{{ product.cart_qty }}</span>
+            <a href="{% url 'increase_quantity' product.id %}" class="step-btn inc">+</a>
+        </div>
+    {% else %}
+        <a href="{% url 'add_to_cart' product.id %}" class="add-btn">Add to cart</a>
+    {% endif %}
+</div>
             </div>
         </div>
         {% empty %}

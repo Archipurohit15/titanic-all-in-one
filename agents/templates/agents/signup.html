@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'agents/signup.css' %}">
+
+<div class="agent-auth-wrap">
+    <div class="agent-auth-card">
+
+        <!-- LEFT PANEL -->
+        <div class="agent-auth-left">
+            <i class="ti ti-building-store deco deco-1"></i>
+            <i class="ti ti-truck deco deco-2"></i>
+            <i class="ti ti-shopping-bag deco deco-3"></i>
+
+            <div class="agent-auth-icon">
+                <i class="ti ti-user-plus"></i>
+            </div>
+
+            <h1>Agent <span>Signup</span></h1>
+            <div class="agent-auth-underline"></div>
+            <p>Create your agent account and start earning with every order.</p>
+
+            <div class="perk">
+                <div class="perk-icon"><i class="ti ti-shopping-bag"></i></div>
+                <div class="perk-text">
+                    <strong>Earn More</strong>
+                    <span>Get commission on every successful order.</span>
+                </div>
+            </div>
+
+            <div class="perk">
+                <div class="perk-icon"><i class="ti ti-chart-bar"></i></div>
+                <div class="perk-text">
+                    <strong>Track Easily</strong>
+                    <span>Monitor your earnings and orders in real-time.</span>
+                </div>
+            </div>
+
+            <div class="perk">
+                <div class="perk-icon"><i class="ti ti-shield-check"></i></div>
+                <div class="perk-text">
+                    <strong>Trusted & Secure</strong>
+                    <span>Your data and earnings are safe with us.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="agent-auth-right">
+            <h2>Create Account</h2>
+            <p class="sub">Fill in your details to join as an agent</p>
+
+            {% if messages %}
+                {% for message in messages %}
+                <div class="error-msg">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <div class="input-icon-wrap">
+                            <i class="ti ti-user"></i>
+                            <input type="text" name="name" placeholder="Enter your name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <div class="input-icon-wrap">
+                            <i class="ti ti-phone"></i>
+                            <input type="text" name="phone" placeholder="Enter your phone" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Username</label>
+                    <div class="input-icon-wrap">
+                        <i class="ti ti-at"></i>
+                        <input type="text" name="username" placeholder="Choose a username" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-icon-wrap">
+                        <i class="ti ti-lock"></i>
+                        <input type="password" name="password" placeholder="Create a password" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="signup-btn">
+                    Sign Up as Agent <i class="ti ti-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="auth-divider">or</div>
+
+            <a href="#" class="login-toggle-btn">
+                <i class="ti ti-login"></i> Already an Agent? Login
+            </a>
+
+            <p class="approval-note">
+                <i class="ti ti-lock"></i> Your details are protected • Approval required before dashboard access
+            </p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -16,6 +16,8 @@ class Order(models.Model):
     pincode = models.CharField(max_length=10)
     referred_by = models.ForeignKey(Agent, null=True, blank=True, on_delete=models.SET_NULL)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    delivery_otp = models.CharField(max_length=6, null=True, blank=True)
+    razorpay_order_id = models.CharField(max_length=100, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

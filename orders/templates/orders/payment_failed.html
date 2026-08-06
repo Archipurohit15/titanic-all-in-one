@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'orders/payment.css' %}">
+
+<div class="payment-wrap">
+    <div class="payment-card">
+        <i class="ti ti-alert-triangle payment-icon failed"></i>
+        <h2>Payment Not Completed</h2>
+        <p>Your order #{{ order.id }} is saved, but the payment didn't go through.</p>
+        <a href="{% url 'retry_payment' order.id %}" class="pay-btn">Try Again</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'orders/payment.css' %}">
+
+<div class="payment-wrap">
+    <div class="payment-card">
+        <i class="ti ti-credit-card payment-icon"></i>
+        <h2>Complete Your Payment</h2>
+        <p>Order #{{ order.id }} — ₹{{ amount_paise|floatformat:"-2" }}</p>
+        <p class="hint">A payment window should open automatically. If it doesn't, click below.</p>
+        <button id="open-payment-btn" class="pay-btn">Pay Now</button>
+    </div>
+</div>
+
+<form id="verify-form" method="POST" action="{% url 'payment_verify' %}">
+    {% csrf_token %}
+    <input type="hidden" name="order_id" value="{{ order.id }}">
+    <input type="hidden" id="rzp_payment_id" name="razorpay_payment_id">
+    <input type="hidden" id="rzp_order_id" name="razorpay_order_id">
+    <input type="hidden" id="rzp_signature" name="razorpay_signature">
+</form>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    function startPayment() {
+        var options = {
+            "key": "{{ razorpay_key_id }}",
+            "amount": "{{ amount_paise }}",
+            "currency": "INR",
+            "name": "Titanic - All in One Store",
+            "description": "Order #{{ order.id }}",
+            "order_id": "{{ razorpay_order_id }}",
+            "handler": function (response) {
+                document.getElementById('rzp_payment_id').value = response.razorpay_payment_id;
+                document.getElementById('rzp_order_id').value = response.razorpay_order_id;
+                document.getElementById('rzp_signature').value = response.razorpay_signature;
+                document.getElementById('verify-form').submit();
+            },
+            "prefill": {
+                "name": "{{ order.full_name }}",
+                "contact": "{{ order.phone }}"
+            },
+            "theme": {
+                "color": "#7A4632"
+            },
+            "modal": {
+                "ondismiss": function () {
+                    window.location.href = "{% url 'payment_failed' order.id %}";
+                }
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.on('payment.failed', function (response) {
+            window.location.href = "{% url 'payment_failed' order.id %}";
+        });
+        rzp1.open();
+    }
+
+    document.getElementById('open-payment-btn').addEventListener('click', startPayment);
+    window.addEventListener('load', startPayment);
+</script>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'agents/dashboard.css' %}">
+
+<div class="dash-wrap">
+
+    <div class="dash-header">
+        <h1>Welcome, <span>{{ agent.name }}</span></h1>
+        <a href="{% url 'agent_logout' %}" class="dash-logout">
+            <i class="ti ti-logout"></i> Logout
+        </a>
+    </div>
+
+    {% if pending_approval %}
+        <div class="pending-box">
+            <i class="ti ti-clock-hour-4"></i>
+            <h2>Approval Pending</h2>
+            <p>Your agent account is under review. Once approved, you'll be able to see your earnings and orders here.</p>
+        </div>
+    {% else %}
+
+        <div class="referral-box">
+            <div>
+                Your referral code: <span class="code">{{ agent.referral_code }}</span>
+            </div>
+            <button onclick="navigator.clipboard.writeText('{{ agent.referral_code }}'); this.innerText='Copied!'">
+                Copy Code
+            </button>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="ti ti-currency-rupee"></i></div>
+                <div class="stat-info">
+                    <div class="label">Total Earnings</div>
+                    <div class="value">₹{{ total_earnings }}</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="ti ti-hourglass"></i></div>
+                <div class="stat-info">
+                    <div class="label">Pending Payout</div>
+                    <div class="value">₹{{ pending_amount }}</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="ti ti-package"></i></div>
+                <div class="stat-info">
+                    <div class="label">Total Orders</div>
+                    <div class="value">{{ total_orders }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dash-section">
+            <h3>Orders Referred by You</h3>
+            <table class="dash-table">
+                <thead>
+                    <tr>
+                        <th>Order</th>
+                        <th>Customer</th>
+                        <th>Status</th>
+                        <th>Commission</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>#{{ order.id }}</td>
+                        <td>{{ order.full_name }}</td>
+                        <td><span class="badge badge-{{ order.status }}">{{ order.get_status_display }}</span></td>
+                        <td>
+                            {% if order.commission %}
+                                ₹{{ order.commission.amount }}
+                                {% if order.commission.is_paid %}
+                                    <span class="badge badge-paid">Paid</span>
+                                {% else %}
+                                    <span class="badge badge-pending">Unpaid</span>
+                                {% endif %}
+                            {% else %}
+                                —
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="4" class="empty-row">No orders yet. Share your referral code to start earning!</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="dash-section">
+            <h3>Payout History</h3>
+            <table class="dash-table">
+                <thead>
+                    <tr>
+                        <th>Order</th>
+                        <th>Amount</th>
+                        <th>Paid On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in payout_history %}
+                    <tr>
+                        <td>#{{ c.order.id }}</td>
+                        <td>₹{{ c.amount }}</td>
+                        <td>{{ c.paid_at|date:"d M Y" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="3" class="empty-row">No payouts received yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    {% endif %}
+
+</div>
+{% endblock %}

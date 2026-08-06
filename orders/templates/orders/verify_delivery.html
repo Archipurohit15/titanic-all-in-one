@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'orders/payment.css' %}">
+
+<div class="payment-wrap">
+    <div class="payment-card">
+        <i class="ti ti-truck-delivery payment-icon"></i>
+        <h2>Confirm Delivery</h2>
+        <p class="hint">Delivery staff: enter the Order ID and the OTP given by the customer.</p>
+
+        {% if success %}
+            <p style="color: var(--brand-instock); font-weight: 600; margin: 16px 0;">{{ success }}</p>
+        {% endif %}
+        {% if error %}
+            <p style="color: var(--brand-discount); font-weight: 600; margin: 16px 0;">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" style="text-align:left; margin-top: 16px;">
+            {% csrf_token %}
+            <label style="font-size:13px; color:#7a7a7a;">Order ID</label>
+            <input type="number" name="order_id" required
+                   style="width:100%; padding:10px; margin:6px 0 16px; border-radius:8px; border:1px solid var(--brand-border);">
+
+            <label style="font-size:13px; color:#7a7a7a;">OTP</label>
+            <input type="text" name="otp" maxlength="6" required
+                   style="width:100%; padding:10px; margin:6px 0 20px; border-radius:8px; border:1px solid var(--brand-border); letter-spacing:4px;">
+
+            <button type="submit" class="pay-btn" style="width:100%;">Confirm Delivery</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

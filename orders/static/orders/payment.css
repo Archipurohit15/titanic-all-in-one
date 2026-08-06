@@ -1,0 +1,57 @@
+.payment-wrap {
+    max-width: 500px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+
+.payment-card {
+    background: #fff;
+    border: 1px solid var(--brand-border);
+    border-radius: 16px;
+    padding: 40px 30px;
+    text-align: center;
+}
+
+.payment-icon {
+    font-size: 46px;
+    color: var(--brand-accent);
+    margin-bottom: 16px;
+}
+
+.payment-icon.failed {
+    color: var(--brand-discount);
+}
+
+.payment-card h2 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--brand-text-dark);
+    margin-bottom: 10px;
+}
+
+.payment-card p {
+    color: #7a7a7a;
+    margin-bottom: 6px;
+}
+
+.payment-card .hint {
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.pay-btn {
+    display: inline-block;
+    background: var(--brand-primary);
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.pay-btn:hover {
+    background: var(--brand-accent);
+}

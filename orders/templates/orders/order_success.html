@@ -84,6 +84,14 @@
 
     </div>
 
+    {% if order.status == 'shipped' and order.delivery_otp %}
+<div class="otp-box">
+    <h3>🚚 Your Delivery OTP</h3>
+    <p>Share this OTP with the delivery person only when your order arrives.</p>
+    <div class="otp-code">{{ order.delivery_otp }}</div>
+</div>
+{% endif %}
+
     <div class="next-steps">
         <h3>What happens next?</h3>
         <div class="steps-row">

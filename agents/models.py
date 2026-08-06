@@ -13,3 +13,13 @@ class Agent(models.Model):
     def __str__(self):
         return self.name
     
+class Commission(models.Model):
+    order = models.OneToOneField('orders.Order', on_delete=models.CASCADE, related_name='commission')
+    agent = models.ForeignKey(Agent, on_delete=models.CASCADE, related_name='commissions')
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    is_paid = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    paid_at = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return f"Commission #{self.id} - {self.agent.name} - ₹{self.amount}"    

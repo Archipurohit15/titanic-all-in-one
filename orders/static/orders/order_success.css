@@ -303,3 +303,57 @@
     border-radius: 10px;
     border: 1px solid var(--brand-border);
 }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 700px) {
+    .success-wrap {
+        padding: 28px 16px;
+    }
+
+    .success-header h2 {
+        font-size: 22px;
+    }
+
+    .info-card {
+        min-width: 100%;
+        padding: 18px;
+    }
+
+    .cards-row {
+        gap: 16px;
+        margin-top: 24px;
+    }
+
+    .otp-box {
+        padding: 18px;
+    }
+
+    .otp-code {
+        font-size: 22px;
+        letter-spacing: 5px;
+        padding: 8px 16px;
+    }
+
+    .next-steps {
+        padding: 20px 16px;
+    }
+
+    .steps-row {
+        justify-content: flex-start;
+    }
+
+    .step {
+        min-width: 45%;
+    }
+
+    .confetti {
+        display: none;
+    }
+}
+
+@media (max-width: 420px) {
+    .step {
+        min-width: 100%;
+    }
+}

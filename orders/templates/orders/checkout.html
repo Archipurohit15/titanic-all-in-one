@@ -2,15 +2,27 @@
 {% load static %}
 
 {% block content %}
-<div style="max-width:900px; margin:0 auto; padding:32px 24px;">
+<style>
+    .checkout-wrap { max-width:900px; margin:0 auto; padding:32px 24px; }
+    .checkout-form { display:flex; gap:24px; flex-wrap:wrap; }
+    .checkout-left { flex:2; min-width:300px; background:#fff; border:1px solid #eee0cc; border-radius:14px; padding:22px; }
+    .checkout-right { flex:1; min-width:260px; background:#fdf6ed; border:1px solid #eee0cc; border-radius:14px; padding:22px; height:fit-content; }
+
+    @media (max-width: 640px) {
+        .checkout-wrap { padding:20px 14px; }
+        .checkout-left, .checkout-right { min-width:100%; padding:16px; }
+        .checkout-form { gap:16px; }
+    }
+</style>
+<div class="checkout-wrap">
 
     <h2 style="font-size:24px; font-weight:700; margin-bottom:24px; color:#1a1a1a;">Checkout</h2>
 
-    <form method="POST" style="display:flex; gap:24px; flex-wrap:wrap;">
+    <form method="POST" class="checkout-form">
         {% csrf_token %}
 
         <!-- Left: address form -->
-        <div style="flex:2; min-width:300px; background:#fff; border:1px solid #eee0cc; border-radius:14px; padding:22px;">
+        <div class="checkout-left">
             <h3 style="font-size:16px; font-weight:700; margin-bottom:16px;">Delivery details</h3>
 
             <div style="margin-bottom:14px;">
@@ -45,7 +57,7 @@
         </div>
 
         <!-- Right: order summary -->
-        <div style="flex:1; min-width:260px; background:#fdf6ed; border:1px solid #eee0cc; border-radius:14px; padding:22px; height:fit-content;">
+        <div class="checkout-right">
             <h3 style="font-size:16px; font-weight:700; margin-bottom:16px;">Order summary</h3>
 
             {% for item in items %}

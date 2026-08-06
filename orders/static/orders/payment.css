@@ -55,3 +55,20 @@
 .pay-btn:hover {
     background: var(--brand-accent);
 }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 560px) {
+    .payment-wrap {
+        margin: 32px auto;
+        padding: 0 14px;
+    }
+
+    .payment-card {
+        padding: 28px 20px;
+    }
+
+    .payment-icon {
+        font-size: 38px;
+    }
+}

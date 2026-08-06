@@ -259,7 +259,17 @@
 }
 
 @media (max-width: 780px) {
-    .agent-auth-card { flex-direction: column; }
+    .agent-auth-wrap { margin: 30px auto; padding: 0 16px; }
+    .agent-auth-card { flex-direction: column; min-height: auto; }
+    .agent-auth-left { padding: 36px 28px; }
     .agent-auth-right { padding: 40px 28px; }
     .form-row { flex-direction: column; gap: 0; }
+}
+
+@media (max-width: 480px) {
+    .agent-auth-left { padding: 28px 20px; }
+    .agent-auth-right { padding: 28px 20px; }
+    .agent-auth-left h1 { font-size: 24px; }
+    .agent-auth-icon { width: 56px; height: 56px; font-size: 22px; margin-bottom: 20px; }
+    .agent-auth-right h2 { font-size: 20px; }
 }

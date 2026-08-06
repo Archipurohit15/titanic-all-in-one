@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
 </head>
 <body>
 
@@ -60,7 +61,56 @@
     {% endblock %}
 
     <footer class="site-footer">
-        <p>&copy; 2026 Titanic — All in One Store, Jaisalmer</p>
+        <div class="footer-top">
+            <div class="footer-col footer-brand">
+                <div class="footer-logo">TITAN<span class="logo-accent">IC<span class="logo-dot"></span></span></div>
+                <p class="footer-tagline">Everything you need, delivered locally — FMCG, groceries, electronics and electricals, one store across Jaisalmer.</p>
+                <div class="footer-social">
+                    <a href="#" class="footer-social-icon" aria-label="Facebook"><i class="ti ti-brand-facebook"></i></a>
+                    <a href="#" class="footer-social-icon" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
+                    <a href="#" class="footer-social-icon" aria-label="WhatsApp"><i class="ti ti-brand-whatsapp"></i></a>
+                    <a href="#" class="footer-social-icon" aria-label="X"><i class="ti ti-brand-x"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="{% url 'product_list' %}">Home</a></li>
+                    <li><a href="{% url 'view_cart' %}">My Cart</a></li>
+                    <li><a href="{% url 'verify_delivery' %}">Track / Verify Delivery</a></li>
+                    <li><a href="{% url 'agent_signup' %}">Become an Agent</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="#">FMCG</a></li>
+                    <li><a href="#">Groceries</a></li>
+                    <li><a href="#">Electronics</a></li>
+                    <li><a href="#">Electricals</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Get in Touch</h4>
+                <ul class="footer-contact">
+                    <li><i class="ti ti-map-pin"></i> Jaisalmer, Rajasthan, India</li>
+                    <li><i class="ti ti-phone"></i> +91 98765 43210</li>
+                    <li><i class="ti ti-mail"></i> support@titanic-store.in</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Titanic — All in One Store, Jaisalmer. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <span>•</span>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
     </footer>
 
 

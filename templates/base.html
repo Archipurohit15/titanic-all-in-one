@@ -31,9 +31,15 @@
 
         <div class="nav-divider"></div>
 
-        <a href="#" class="nav-icon-btn">
-            <i class="ti ti-user"></i>
-        </a>
+        {% if user.is_authenticated %}
+<a href="{% url 'customer_dashboard' %}" class="nav-icon-btn">
+    <i class="ti ti-user"></i>
+</a>
+{% else %}
+<a href="{% url 'customer_login' %}" class="nav-icon-btn">
+    <i class="ti ti-user"></i>
+</a>
+{% endif %}
 
         <a href="{% url 'view_cart' %}" class="nav-icon-btn">
             <i class="ti ti-shopping-cart"></i>

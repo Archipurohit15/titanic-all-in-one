@@ -27,12 +27,11 @@
 
             <div style="margin-bottom:14px;">
                 <label style="display:block; font-size:13px; font-weight:600; margin-bottom:6px;">Full name</label>
-                <input type="text" name="full_name" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px;">
-            </div>
+                <input type="text" name="full_name" value="{{ customer.name }}" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px;">
 
             <div style="margin-bottom:14px;">
                 <label style="display:block; font-size:13px; font-weight:600; margin-bottom:6px;">Phone</label>
-                <input type="text" name="phone" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px;">
+                <input type="text" name="phone" value="{{ customer.phone }}" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px;">
             </div>
 
             <div style="margin-bottom:14px;">

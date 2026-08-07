@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'customers/dashboard.css' %}">
+
+<div class="dash-wrap">
+
+    <div class="dash-header">
+        <h1>Hi, <span>{{ customer.name }}</span></h1>
+        <a href="{% url 'customer_logout' %}" class="dash-logout">
+            <i class="ti ti-logout"></i> Logout
+        </a>
+    </div>
+
+    <div class="dash-section">
+        <h3>Your Orders</h3>
+        <table class="dash-table">
+            <thead>
+                <tr>
+                    <th>Order</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Track</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in orders_with_total %}
+                <tr>
+                    <td>#TIT{{ entry.order.id }}</td>
+                    <td>{{ entry.order.created_at|date:"d M Y" }}</td>
+                    <td><span class="badge badge-{{ entry.order.status }}">{{ entry.order.get_status_display }}</span></td>
+                    <td>₹{{ entry.total }}</td>
+                    <td><a href="{% url 'order_success' entry.order.id %}">View</a></td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5" class="empty-row">No orders yet. Start shopping!</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

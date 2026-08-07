@@ -1,7 +1,7 @@
 from django.db import models
 from products.models import Product
 from agents.models import Agent
-
+from django.contrib.auth.models import User
 
 class Order(models.Model):
     STATUS_CHOICES = [
@@ -10,6 +10,7 @@ class Order(models.Model):
         ('shipped', 'Shipped'),
         ('delivered', 'Delivered'),
     ]
+    customer = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name='orders')
     full_name = models.CharField(max_length=100)
     phone = models.CharField(max_length=15)
     address = models.TextField()

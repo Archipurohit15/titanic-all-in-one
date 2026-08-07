@@ -84,6 +84,11 @@ def view_cart(request):
 
 
 def checkout(request):
+    if not hasattr(request.user, 'customer'):
+        messages.error(request, 'Page is only for customers. Login / signup to view')
+        return redirect('customer_login')
+    customer=request.user.customer
+
     cart = request.session.get('cart', {})
     if not cart:
         return redirect('view_cart')
@@ -110,6 +115,7 @@ def checkout(request):
             agent = get_object_or_404(Agent, id=agent_id)
 
         order = Order.objects.create(
+            customer=request.user,
             full_name=full_name,
             phone=phone,
             address=address,
@@ -158,6 +164,7 @@ def checkout(request):
         'items': items,
         'total': total,
         'agents': agents,
+        'customer': customer,
     })
 
 

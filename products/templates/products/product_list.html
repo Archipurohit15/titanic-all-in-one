@@ -34,33 +34,37 @@
         <div class="sbc-line"></div>
     </div>
 
-    <div class="sbc-grid">
+<div class="sbc-grid">
         <div class="sbc-card sbc-fmcg">
             <h3>FMCG</h3>
-            <!-- <p class="sbc-count">100+ Products</p> -->
             <div class="sbc-img"> <img src="{% static 'products/fmcg.png' %}" alt="FMCG"> </div>
-            <a href="#" class="sbc-btn">Shop FMCG <i class="ti ti-arrow-right"></i></a>
+            {% if featured_categories.fmcg %}
+            <a href="{% url 'category_detail' featured_categories.fmcg.id %}" class="sbc-btn">Shop FMCG <i class="ti ti-arrow-right"></i></a>
+            {% endif %}
         </div>
 
         <div class="sbc-card sbc-groceries">
             <h3>Groceries</h3>
-            <!-- <p class="sbc-count">200+ Products</p> -->
             <div class="sbc-img"><img src="{% static 'products/groceries.png' %}" alt="Groceries"></div>
-            <a href="#" class="sbc-btn">Shop Groceries <i class="ti ti-arrow-right"></i></a>
+            {% if featured_categories.groceries %}
+            <a href="{% url 'category_detail' featured_categories.groceries.id %}" class="sbc-btn">Shop Groceries <i class="ti ti-arrow-right"></i></a>
+            {% endif %}
         </div>
 
         <div class="sbc-card sbc-electronics">
             <h3>Electronics</h3>
-            <!-- <p class="sbc-count">80+ Products</p> -->
             <div class="sbc-img"><img src="{% static 'products/electronics.png' %}" alt="   Electronics"></div>
-            <a href="#" class="sbc-btn">Shop Electronics <i class="ti ti-arrow-right"></i></a>
+            {% if featured_categories.electronics %}
+            <a href="{% url 'category_detail' featured_categories.electronics.id %}" class="sbc-btn">Shop Electronics <i class="ti ti-arrow-right"></i></a>
+            {% endif %}
         </div>
 
         <div class="sbc-card sbc-electricals">
             <h3>Electricals</h3>
-            <!-- <p class="sbc-count">120+ Products</p> -->
             <div class="sbc-img"><img src="{% static 'products/electricals.png' %}" alt="Electricals"></div>
-            <a href="#" class="sbc-btn">Shop Electricals <i class="ti ti-arrow-right"></i></a>
+            {% if featured_categories.electricals %}
+            <a href="{% url 'category_detail' featured_categories.electricals.id %}" class="sbc-btn">Shop Electricals <i class="ti ti-arrow-right"></i></a>
+            {% endif %}
         </div>
     </div>
 </section>

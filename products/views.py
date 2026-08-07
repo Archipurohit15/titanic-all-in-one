@@ -8,6 +8,7 @@ def product_list(request):
         groups = cat.children.all()
         if groups.exists():
             sections.append({'department': cat, 'groups': groups})
+
     return render(request, 'products/product_list.html', {'sections': sections})
 
 

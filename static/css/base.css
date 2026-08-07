@@ -175,6 +175,10 @@ body {
     padding: 10px 28px;
 }
 
+.cat-all-wrap {
+    position: relative;
+}
+
 .cat-all {
     display: flex;
     align-items: center;
@@ -187,6 +191,56 @@ body {
 
 .cat-all i {
     font-size: 15px;
+}
+
+.cat-all-caret {
+    font-size: 12px !important;
+    opacity: 0.7;
+}
+
+.cat-all-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+    min-width: 220px;
+    padding: 8px;
+    z-index: 50;
+}
+
+.cat-all-dropdown.open {
+    display: block;
+}
+
+.cat-all-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--brand-text-dark);
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 500;
+}
+
+.cat-all-dropdown a:hover {
+    background: var(--brand-bg-warm);
+}
+
+.cat-all-dropdown a i {
+    font-size: 16px;
+    color: var(--brand-accent);
+    width: 18px;
+}
+
+.cat-all-divider {
+    height: 1px;
+    background: var(--brand-border);
+    margin: 6px 4px;
 }
 
 .cat-link {

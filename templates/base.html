@@ -51,14 +51,43 @@
 
 
 <div class="category-bar">
-    <div class="cat-all">
-        <i class="ti ti-menu-2"></i>
-        <span>All</span>
+    <div class="cat-all-wrap">
+        <div class="cat-all" id="catAllBtn">
+            <i class="ti ti-menu-2"></i>
+            <span>All</span>
+            <i class="ti ti-chevron-down cat-all-caret"></i>
+        </div>
+        <div class="cat-all-dropdown" id="catAllDropdown">
+            {% if user.is_authenticated and user.customer %}
+            <a href="{% url 'customer_dashboard' %}"><i class="ti ti-user"></i> Your Account</a>
+            <a href="{% url 'customer_logout' %}"><i class="ti ti-logout"></i> Logout</a>
+            {% else %}
+            <a href="{% url 'customer_login' %}"><i class="ti ti-login"></i> Login / Signup</a>
+            {% endif %}
+
+            <div class="cat-all-divider"></div>
+
+            {% if user.is_authenticated and user.agent %}
+            <a href="{% url 'agent_dashboard' %}"><i class="ti ti-layout-dashboard"></i> Agent Dashboard</a>
+            <a href="{% url 'agent_logout' %}"><i class="ti ti-logout"></i> Agent Logout</a>
+            {% else %}
+            <a href="{% url 'agent_signup' %}"><i class="ti ti-users-plus"></i> Become an Agent</a>
+            <a href="{% url 'agent_login' %}"><i class="ti ti-briefcase"></i> Agent Login</a>
+            {% endif %}
+        </div>
     </div>
-    <a href="#" class="cat-link">FMCG</a>
-    <a href="#" class="cat-link">Groceries</a>
-    <a href="#" class="cat-link active">Electronics</a>
-    <a href="#" class="cat-link">Electrical</a>
+    {% if featured_categories.fmcg %}
+    <a href="{% url 'category_detail' featured_categories.fmcg.id %}" class="cat-link">FMCG</a>
+    {% endif %}
+    {% if featured_categories.groceries %}
+    <a href="{% url 'category_detail' featured_categories.groceries.id %}" class="cat-link">Groceries</a>
+    {% endif %}
+    {% if featured_categories.electronics %}
+    <a href="{% url 'category_detail' featured_categories.electronics.id %}" class="cat-link">Electronics</a>
+    {% endif %}
+    {% if featured_categories.electricals %}
+    <a href="{% url 'category_detail' featured_categories.electricals.id %}" class="cat-link">Electrical</a>
+    {% endif %}
 </div>
 
 <div id="toast" class="toast"></div>
@@ -121,6 +150,20 @@
 
 
 <script>
+    document.addEventListener('click', function (e) {
+    const btn = document.getElementById('catAllBtn');
+    const dropdown = document.getElementById('catAllDropdown');
+
+    if (e.target.closest('#catAllBtn')) {
+        dropdown.classList.toggle('open');
+        return;
+    }
+
+    if (!e.target.closest('#catAllDropdown')) {
+        dropdown.classList.remove('open');
+    }
+});
+
 document.addEventListener('click', function (e) {
     const link = e.target.closest('.add-btn, .step-btn');
     if (!link || !link.closest('.cart-control')) return;

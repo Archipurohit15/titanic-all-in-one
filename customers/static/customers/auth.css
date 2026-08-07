@@ -259,7 +259,20 @@
 }
 
 @media (max-width: 780px) {
-    .customer-auth-card { flex-direction: column; }
-    .customer-auth-right { padding: 40px 28px; }
+    .customer-auth-wrap { margin: 30px auto; padding: 0 16px; }
+    .customer-auth-card { flex-direction: column; min-height: auto; }
+    .customer-auth-left { min-width: 0; padding: 36px 28px; }
+    .customer-auth-right { min-width: 0; padding: 40px 28px; }
     .form-row { flex-direction: column; gap: 0; }
+}
+
+@media (max-width: 480px) {
+    .customer-auth-left { padding: 28px 20px; }
+    .customer-auth-right { padding: 28px 20px; }
+    .customer-auth-left h1 { font-size: 24px; }
+    .customer-auth-icon { width: 56px; height: 56px; font-size: 22px; margin-bottom: 20px; }
+    .customer-auth-right h2 { font-size: 20px; }
+    .deco-1 { font-size: 34px; }
+    .deco-2 { font-size: 30px; }
+    .deco-3 { font-size: 26px; }
 }

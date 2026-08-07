@@ -196,6 +196,11 @@
 }
 
 @media (max-width: 720px) {
+    .dash-wrap { margin: 24px auto; padding: 0 14px; }
+    .dash-header h1 { font-size: 21px; }
     .stat-grid { grid-template-columns: 1fr; }
     .dash-table { display: block; overflow-x: auto; white-space: nowrap; }
+    .dash-section { padding: 16px; }
+    .pending-box { padding: 28px 20px; }
+    .referral-box { padding: 14px 16px; }
 }

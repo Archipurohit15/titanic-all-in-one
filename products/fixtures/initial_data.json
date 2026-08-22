@@ -1,0 +1,1578 @@
+[
+{
+  "model": "products.categories",
+  "pk": 104,
+  "fields": {
+    "name": "Personal Care & Household",
+    "parent": null,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/7262934/pexels-photo-7262934.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 105,
+  "fields": {
+    "name": "Bath & Body",
+    "parent": 104,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/14363175/pexels-photo-14363175.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 106,
+  "fields": {
+    "name": "Soap",
+    "parent": 105,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/5938598/pexels-photo-5938598.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 107,
+  "fields": {
+    "name": "Body Wash",
+    "parent": 105,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/5241048/pexels-photo-5241048.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 108,
+  "fields": {
+    "name": "Body Lotion",
+    "parent": 105,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/14788377/pexels-photo-14788377.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 109,
+  "fields": {
+    "name": "Talcum Powder",
+    "parent": 105,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/8728582/pexels-photo-8728582.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 110,
+  "fields": {
+    "name": "Scrubber",
+    "parent": 105,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/7351636/pexels-photo-7351636.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 111,
+  "fields": {
+    "name": "Deodorant",
+    "parent": 105,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/8490122/pexels-photo-8490122.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 112,
+  "fields": {
+    "name": "Perfume",
+    "parent": 105,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/10873814/pexels-photo-10873814.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 113,
+  "fields": {
+    "name": "Hair Care",
+    "parent": 104,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/28994563/pexels-photo-28994563.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 114,
+  "fields": {
+    "name": "Shampoo",
+    "parent": 113,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/23349900/pexels-photo-23349900.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 115,
+  "fields": {
+    "name": "Hair Oil",
+    "parent": 113,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/28994394/pexels-photo-28994394.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 116,
+  "fields": {
+    "name": "Hair Colour",
+    "parent": 113,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/2718771/pexels-photo-2718771.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 117,
+  "fields": {
+    "name": "Oral Care",
+    "parent": 104,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/15499663/pexels-photo-15499663.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 118,
+  "fields": {
+    "name": "Tooth Paste",
+    "parent": 117,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/7622566/pexels-photo-7622566.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 119,
+  "fields": {
+    "name": "Tooth Brush",
+    "parent": 117,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/4045554/pexels-photo-4045554.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 120,
+  "fields": {
+    "name": "Skin Care",
+    "parent": 104,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/12115040/pexels-photo-12115040.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 121,
+  "fields": {
+    "name": "Face Wash",
+    "parent": 120,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/7623581/pexels-photo-7623581.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 122,
+  "fields": {
+    "name": "Face Cream",
+    "parent": 120,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/6925480/pexels-photo-6925480.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 123,
+  "fields": {
+    "name": "Face Serum",
+    "parent": 120,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/8709566/pexels-photo-8709566.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 124,
+  "fields": {
+    "name": "Cosmetics",
+    "parent": 120,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/4482931/pexels-photo-4482931.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 125,
+  "fields": {
+    "name": "Baby Care",
+    "parent": 104,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/32890756/pexels-photo-32890756.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 126,
+  "fields": {
+    "name": "Diaper",
+    "parent": 125,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/41165/baby-cloth-clothing-color-41165.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 127,
+  "fields": {
+    "name": "Baby Care",
+    "parent": 125,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/32890756/pexels-photo-32890756.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 128,
+  "fields": {
+    "name": "Feminine Hygiene",
+    "parent": 104,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/7692468/pexels-photo-7692468.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 129,
+  "fields": {
+    "name": "Sanitary Pad",
+    "parent": 128,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/7692459/pexels-photo-7692459.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 130,
+  "fields": {
+    "name": "Health & Nutrition",
+    "parent": 104,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/7890204/pexels-photo-7890204.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 131,
+  "fields": {
+    "name": "Medical Items",
+    "parent": 130,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/33394283/pexels-photo-33394283.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 132,
+  "fields": {
+    "name": "Nutrition Items",
+    "parent": 130,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/8580745/pexels-photo-8580745.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 133,
+  "fields": {
+    "name": "Shaving",
+    "parent": 104,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/7253884/pexels-photo-7253884.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 134,
+  "fields": {
+    "name": "Shaving Items",
+    "parent": 133,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/4429185/pexels-photo-4429185.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 135,
+  "fields": {
+    "name": "Blade",
+    "parent": 133,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/36764709/pexels-photo-36764709.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 136,
+  "fields": {
+    "name": "Laundry Care",
+    "parent": 104,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/10565611/pexels-photo-10565611.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 137,
+  "fields": {
+    "name": "Detergent Powder",
+    "parent": 136,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/13768941/pexels-photo-13768941.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 138,
+  "fields": {
+    "name": "Liquid Detergent",
+    "parent": 136,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/10566513/pexels-photo-10566513.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 139,
+  "fields": {
+    "name": "Fabric Items",
+    "parent": 136,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/35009340/pexels-photo-35009340.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 140,
+  "fields": {
+    "name": "Home Cleaning",
+    "parent": 104,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/6196694/pexels-photo-6196694.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 141,
+  "fields": {
+    "name": "Hand Wash",
+    "parent": 140,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/4474053/pexels-photo-4474053.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 142,
+  "fields": {
+    "name": "Cleaning Items",
+    "parent": 140,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/28576637/pexels-photo-28576637.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 143,
+  "fields": {
+    "name": "Dish Wash Bar",
+    "parent": 140,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/2796103/pexels-photo-2796103.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 144,
+  "fields": {
+    "name": "Dish Wash Liquid",
+    "parent": 140,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/5904038/pexels-photo-5904038.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 145,
+  "fields": {
+    "name": "Home Care",
+    "parent": 104,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/36706839/pexels-photo-36706839.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 146,
+  "fields": {
+    "name": "Coil",
+    "parent": 145,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/7019608/pexels-photo-7019608.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 147,
+  "fields": {
+    "name": "All Out",
+    "parent": 145,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/8541320/pexels-photo-8541320.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 148,
+  "fields": {
+    "name": "Room Freshener",
+    "parent": 145,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/6633539/pexels-photo-6633539.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 149,
+  "fields": {
+    "name": "Agarbatti",
+    "parent": 145,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/7351728/pexels-photo-7351728.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 150,
+  "fields": {
+    "name": "Misc",
+    "parent": 104,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/30563035/pexels-photo-30563035.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 151,
+  "fields": {
+    "name": "Battery/Cell",
+    "parent": 150,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/37578596/pexels-photo-37578596.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 152,
+  "fields": {
+    "name": "Gift Items",
+    "parent": 150,
+    "commission_percent": "6.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/18120192/pexels-photo-18120192.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 153,
+  "fields": {
+    "name": "Groceries",
+    "parent": null,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": null
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 154,
+  "fields": {
+    "name": "Snacks & Namkeen",
+    "parent": 153,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/17480807/pexels-photo-17480807.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 155,
+  "fields": {
+    "name": "Biscuits",
+    "parent": 154,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/5985991/pexels-photo-5985991.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 156,
+  "fields": {
+    "name": "Namkeen",
+    "parent": 154,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/27643179/pexels-photo-27643179.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 157,
+  "fields": {
+    "name": "Papad",
+    "parent": 154,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/34347890/pexels-photo-34347890.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 158,
+  "fields": {
+    "name": "Chips",
+    "parent": 154,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/6696938/pexels-photo-6696938.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 159,
+  "fields": {
+    "name": "Wafers",
+    "parent": 154,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/30867849/pexels-photo-30867849.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 160,
+  "fields": {
+    "name": "Cookies",
+    "parent": 154,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/35156663/pexels-photo-35156663.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 161,
+  "fields": {
+    "name": "Sweets & Spreads",
+    "parent": 153,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/25048976/pexels-photo-25048976.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 162,
+  "fields": {
+    "name": "Toffee",
+    "parent": 161,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/14631349/pexels-photo-14631349.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 163,
+  "fields": {
+    "name": "Candy",
+    "parent": 161,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/5469039/pexels-photo-5469039.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 164,
+  "fields": {
+    "name": "Jam",
+    "parent": 161,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/9160297/pexels-photo-9160297.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 165,
+  "fields": {
+    "name": "Honey",
+    "parent": 161,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/35510387/pexels-photo-35510387.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 166,
+  "fields": {
+    "name": "Breakfast & Cereals",
+    "parent": 153,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/6150644/pexels-photo-6150644.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 167,
+  "fields": {
+    "name": "Corn Flakes",
+    "parent": 166,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/30563559/pexels-photo-30563559.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 168,
+  "fields": {
+    "name": "Muesli",
+    "parent": 166,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/16091905/pexels-photo-16091905.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 169,
+  "fields": {
+    "name": "Oats",
+    "parent": 166,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/39614/field-oats-oat-field-arable-39614.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 170,
+  "fields": {
+    "name": "Cereal",
+    "parent": 166,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/5893577/pexels-photo-5893577.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 171,
+  "fields": {
+    "name": "Poha",
+    "parent": 166,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/13500891/pexels-photo-13500891.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 172,
+  "fields": {
+    "name": "Noodles, Pasta & Ready-to-Cook",
+    "parent": 153,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/8108050/pexels-photo-8108050.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 173,
+  "fields": {
+    "name": "Noodles",
+    "parent": 172,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/4223948/pexels-photo-4223948.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 174,
+  "fields": {
+    "name": "Pasta",
+    "parent": 172,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/31637792/pexels-photo-31637792.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 175,
+  "fields": {
+    "name": "Custard Powder",
+    "parent": 172,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/18532488/pexels-photo-18532488.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 176,
+  "fields": {
+    "name": "Soup",
+    "parent": 172,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/35375008/pexels-photo-35375008.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 177,
+  "fields": {
+    "name": "Beverages",
+    "parent": 153,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/11404132/pexels-photo-11404132.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 178,
+  "fields": {
+    "name": "Coffee",
+    "parent": 177,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/27860686/pexels-photo-27860686.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 179,
+  "fields": {
+    "name": "Tea/Chai-Pati",
+    "parent": 177,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/34324342/pexels-photo-34324342.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 180,
+  "fields": {
+    "name": "Beverages",
+    "parent": 177,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/11404132/pexels-photo-11404132.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 181,
+  "fields": {
+    "name": "Energy Drink",
+    "parent": 177,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/4853722/pexels-photo-4853722.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 182,
+  "fields": {
+    "name": "Juices",
+    "parent": 177,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/31823001/pexels-photo-31823001.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 183,
+  "fields": {
+    "name": "Cold Drink",
+    "parent": 177,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/4113653/pexels-photo-4113653.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 184,
+  "fields": {
+    "name": "Atta & Staples",
+    "parent": 153,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/4224264/pexels-photo-4224264.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 185,
+  "fields": {
+    "name": "Flour",
+    "parent": 184,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/1047326/pexels-photo-1047326.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 186,
+  "fields": {
+    "name": "Suji",
+    "parent": 184,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/37455319/pexels-photo-37455319.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 187,
+  "fields": {
+    "name": "Besan/Salt",
+    "parent": 184,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/29547419/pexels-photo-29547419.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 188,
+  "fields": {
+    "name": "Dry Fruit",
+    "parent": 184,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/11135641/pexels-photo-11135641.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 189,
+  "fields": {
+    "name": "Sauces, Pickles & Masale",
+    "parent": 153,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/36798186/pexels-photo-36798186.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 190,
+  "fields": {
+    "name": "Pickles",
+    "parent": 189,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/8599636/pexels-photo-8599636.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 191,
+  "fields": {
+    "name": "Ketchup",
+    "parent": 189,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/8305726/pexels-photo-8305726.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 192,
+  "fields": {
+    "name": "Chilli Sauces",
+    "parent": 189,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/5855238/pexels-photo-5855238.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 193,
+  "fields": {
+    "name": "Mayonnaise",
+    "parent": 189,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/33775646/pexels-photo-33775646.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 194,
+  "fields": {
+    "name": "Masale",
+    "parent": 189,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/27874607/pexels-photo-27874607.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 195,
+  "fields": {
+    "name": "Dairy",
+    "parent": 153,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/3735169/pexels-photo-3735169.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 196,
+  "fields": {
+    "name": "Milk Product",
+    "parent": 195,
+    "commission_percent": "2.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/28985887/pexels-photo-28985887.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 197,
+  "fields": {
+    "name": "Electronics",
+    "parent": null,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": null
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 198,
+  "fields": {
+    "name": "Large Appliances",
+    "parent": 197,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/28272321/pexels-photo-28272321.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 199,
+  "fields": {
+    "name": "LED TV",
+    "parent": 198,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/15259088/pexels-photo-15259088.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 200,
+  "fields": {
+    "name": "Air Conditioner",
+    "parent": 198,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/30962631/pexels-photo-30962631.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 201,
+  "fields": {
+    "name": "Refrigerator",
+    "parent": 198,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/5498228/pexels-photo-5498228.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 202,
+  "fields": {
+    "name": "Cooler",
+    "parent": 198,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/33957225/pexels-photo-33957225.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 203,
+  "fields": {
+    "name": "Geyser",
+    "parent": 198,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/19499967/pexels-photo-19499967.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 204,
+  "fields": {
+    "name": "Water RO",
+    "parent": 198,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/4756926/pexels-photo-4756926.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 205,
+  "fields": {
+    "name": "Home Theatre",
+    "parent": 198,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/34153693/pexels-photo-34153693.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 206,
+  "fields": {
+    "name": "Kitchen Appliances",
+    "parent": 197,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/7614540/pexels-photo-7614540.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 207,
+  "fields": {
+    "name": "Gas Stove",
+    "parent": 206,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/13422435/pexels-photo-13422435.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 208,
+  "fields": {
+    "name": "Chimney",
+    "parent": 206,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/13543563/pexels-photo-13543563.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 209,
+  "fields": {
+    "name": "Microwave Oven",
+    "parent": 206,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/7614540/pexels-photo-7614540.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 210,
+  "fields": {
+    "name": "Mixer Grinder",
+    "parent": 206,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/5169914/pexels-photo-5169914.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 211,
+  "fields": {
+    "name": "Juicer Mixer Grinder",
+    "parent": 206,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/29423237/pexels-photo-29423237.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 212,
+  "fields": {
+    "name": "Hand Blender",
+    "parent": 206,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/8357682/pexels-photo-8357682.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 213,
+  "fields": {
+    "name": "Sandwich & Grill Toaster",
+    "parent": 206,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/25946547/pexels-photo-25946547.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 214,
+  "fields": {
+    "name": "Air Fryer",
+    "parent": 206,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/35285814/pexels-photo-35285814.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 215,
+  "fields": {
+    "name": "Personal Care & Others",
+    "parent": 197,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/6590934/pexels-photo-6590934.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 216,
+  "fields": {
+    "name": "Personal Groomer",
+    "parent": 215,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/6816850/pexels-photo-6816850.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 217,
+  "fields": {
+    "name": "Iron",
+    "parent": 215,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/16472075/pexels-photo-16472075.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 218,
+  "fields": {
+    "name": "Stabilizer",
+    "parent": 215,
+    "commission_percent": "4.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/12205961/pexels-photo-12205961.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 219,
+  "fields": {
+    "name": "Electrical",
+    "parent": null,
+    "commission_percent": "5.00",
+    "image": "",
+    "auto_image_url": null
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 220,
+  "fields": {
+    "name": "Fans & Ventilation",
+    "parent": 219,
+    "commission_percent": "5.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/5502720/pexels-photo-5502720.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 221,
+  "fields": {
+    "name": "Table Fan",
+    "parent": 220,
+    "commission_percent": "5.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/8102621/pexels-photo-8102621.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 222,
+  "fields": {
+    "name": "Ceiling Fan",
+    "parent": 220,
+    "commission_percent": "5.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/12689254/pexels-photo-12689254.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 223,
+  "fields": {
+    "name": "Exhaust Fan (PVC & Metal)",
+    "parent": 220,
+    "commission_percent": "5.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/1650031/pexels-photo-1650031.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 224,
+  "fields": {
+    "name": "Pumps",
+    "parent": 219,
+    "commission_percent": "5.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/27127394/pexels-photo-27127394.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 225,
+  "fields": {
+    "name": "Monobloc Pump",
+    "parent": 224,
+    "commission_percent": "5.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/28240873/pexels-photo-28240873.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 226,
+  "fields": {
+    "name": "Lighting",
+    "parent": 219,
+    "commission_percent": "5.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/5561129/pexels-photo-5561129.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 227,
+  "fields": {
+    "name": "Jhoomar (Chandelier)",
+    "parent": 226,
+    "commission_percent": "5.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/36559640/pexels-photo-36559640.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 228,
+  "fields": {
+    "name": "Wall Light",
+    "parent": 226,
+    "commission_percent": "5.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/8243138/pexels-photo-8243138.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 229,
+  "fields": {
+    "name": "Gate Light",
+    "parent": 226,
+    "commission_percent": "5.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/34714219/pexels-photo-34714219.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 230,
+  "fields": {
+    "name": "Mirror Light",
+    "parent": 226,
+    "commission_percent": "5.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/11312206/pexels-photo-11312206.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.categories",
+  "pk": 231,
+  "fields": {
+    "name": "POP Light",
+    "parent": 226,
+    "commission_percent": "5.00",
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/34106029/pexels-photo-34106029.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 23,
+  "fields": {
+    "category": 106,
+    "name": "dettol cool",
+    "description": "ngkjrwfbgkjwjgjhfwghrwkghwi",
+    "price": "20.00",
+    "stock": 0,
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/4107952/pexels-photo-4107952.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "created_at": "2026-07-31T22:20:21.107Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 24,
+  "fields": {
+    "category": 111,
+    "name": "denver men",
+    "description": "",
+    "price": "190.00",
+    "stock": 0,
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/17595765/pexels-photo-17595765.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "created_at": "2026-07-31T22:20:35.138Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 25,
+  "fields": {
+    "category": 111,
+    "name": "denver men",
+    "description": "",
+    "price": "190.00",
+    "stock": 0,
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/17595765/pexels-photo-17595765.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "created_at": "2026-07-31T22:23:59.723Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 26,
+  "fields": {
+    "category": 115,
+    "name": "dabour amla hair oil",
+    "description": "",
+    "price": "250.00",
+    "stock": 5,
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/32112804/pexels-photo-32112804.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "created_at": "2026-07-31T22:24:32.240Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 27,
+  "fields": {
+    "category": 114,
+    "name": "clinic plus",
+    "description": "",
+    "price": "300.00",
+    "stock": 0,
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/31613321/pexels-photo-31613321.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "created_at": "2026-07-31T22:24:47.863Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 28,
+  "fields": {
+    "category": 137,
+    "name": "surf excel easy wash",
+    "description": "",
+    "price": "190.00",
+    "stock": 0,
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/6851123/pexels-photo-6851123.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "created_at": "2026-07-31T22:25:35.534Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 29,
+  "fields": {
+    "category": 118,
+    "name": "colgate",
+    "description": "",
+    "price": "120.00",
+    "stock": 3,
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/5612670/pexels-photo-5612670.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "created_at": "2026-07-31T22:25:51.126Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 30,
+  "fields": {
+    "category": 156,
+    "name": "bikaji bhujia",
+    "description": "",
+    "price": "285.00",
+    "stock": 0,
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/9557672/pexels-photo-9557672.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "created_at": "2026-07-31T22:26:21.757Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 31,
+  "fields": {
+    "category": 171,
+    "name": "tata poha",
+    "description": "",
+    "price": "57.00",
+    "stock": 0,
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/13500891/pexels-photo-13500891.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "created_at": "2026-07-31T22:26:52.143Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 32,
+  "fields": {
+    "category": 173,
+    "name": "maggie",
+    "description": "",
+    "price": "60.00",
+    "stock": 5,
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/38293787/pexels-photo-38293787.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "created_at": "2026-07-31T22:27:15.865Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 33,
+  "fields": {
+    "category": 119,
+    "name": "colgate brush",
+    "description": "",
+    "price": "50.00",
+    "stock": 0,
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/5612670/pexels-photo-5612670.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "created_at": "2026-07-31T22:27:41.426Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 34,
+  "fields": {
+    "category": 109,
+    "name": "ponds white beauty",
+    "description": "",
+    "price": "67.00",
+    "stock": 0,
+    "image": "",
+    "auto_image_url": "https://images.pexels.com/photos/19458278/pexels-photo-19458278.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "created_at": "2026-07-31T22:28:00.575Z"
+  }
+}
+]

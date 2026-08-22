@@ -77,7 +77,7 @@
         </div>
     </div>
     {% if featured_categories.fmcg %}
-    <a href="{% url 'category_detail' featured_categories.fmcg.id %}" class="cat-link">FMCG</a>
+    <a href="{% url 'category_detail' featured_categories.fmcg.id %}" class="cat-link"> Personal Care & Household</a>
     {% endif %}
     {% if featured_categories.groceries %}
     <a href="{% url 'category_detail' featured_categories.groceries.id %}" class="cat-link">Groceries</a>
@@ -169,6 +169,8 @@ document.addEventListener('click', function (e) {
     if (!link || !link.closest('.cart-control')) return;
     e.preventDefault();
 
+    const isDecrease = link.classList.contains('dec');
+
     fetch(link.href, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
         .then(res => res.json())
         .then(data => {
@@ -185,8 +187,15 @@ document.addEventListener('click', function (e) {
             }
             document.getElementById('cart-badge').textContent = data.cart_count;
 
+            let message;
+            if (isDecrease) {
+                message = data.quantity > 0 ? 'Quantity updated' : 'Product removed from cart';
+            } else {
+                message = 'Product added to cart';
+            }
+
             const toast = document.getElementById('toast');
-            toast.textContent = 'Product added to cart';
+            toast.textContent = message;
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 1800);
         });

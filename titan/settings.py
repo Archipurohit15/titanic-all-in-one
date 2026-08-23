@@ -38,12 +38,14 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'admin_interface',
     'colorfield',
+    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
     'products',
     'orders',
     'agents',
@@ -136,3 +138,13 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 RAZORPAY_KEY_ID = os.getenv('RAZORPAY_KEY_ID')
 RAZORPAY_KEY_SECRET = os.getenv('RAZORPAY_KEY_SECRET')
 RAZORPAY_BYPASS = os.getenv('RAZORPAY_BYPASS', 'False') == 'True'
+
+
+# Cloudinary - stores manually uploaded product/category images permanently
+# (Render's disk is temporary and wipes uploaded files on every deploy)
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

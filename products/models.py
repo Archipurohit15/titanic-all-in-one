@@ -21,6 +21,9 @@ class Categories(models.Model):
         if not self.image and not self.auto_image_url:
             self.auto_image_url = fetch_image_for(self.name)
         super().save(*args, **kwargs)
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
 
 
 

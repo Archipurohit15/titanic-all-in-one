@@ -34,10 +34,17 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField(default=0)
-    commission_percent = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     image = models.ImageField(upload_to='products/', blank=True, null=True)
     auto_image_url = models.URLField(blank=True, null=True)
+    min_delivery_days = models.PositiveIntegerField(default=3, help_text="Minimum days for delivery (e.g. 3)")
+    max_delivery_days = models.PositiveIntegerField(default=7, help_text="Maximum days for delivery (e.g. 7)")
     created_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def delivery_estimate_text(self):
+        if self.min_delivery_days == self.max_delivery_days:
+            return f"{self.min_delivery_days} day{'s' if self.min_delivery_days != 1 else ''}"
+        return f"{self.min_delivery_days}-{self.max_delivery_days} days"
 
     def save(self, *args, **kwargs):
         if not self.image and not self.auto_image_url:

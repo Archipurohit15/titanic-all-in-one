@@ -101,6 +101,13 @@ def checkout(request):
         total += subtotal
         items.append({'product': product, 'quantity': quantity, 'subtotal': subtotal})
 
+    # Order ships together, so overall estimate = the item that takes the longest.
+    if items:
+        order_min_days = max(item['product'].min_delivery_days for item in items)
+        order_max_days = max(item['product'].max_delivery_days for item in items)
+    else:
+        order_min_days = order_max_days = None
+
     agents = Agent.objects.filter(is_approved=True)
 
     if request.method == 'POST':
@@ -165,6 +172,8 @@ def checkout(request):
         'total': total,
         'agents': agents,
         'customer': customer,
+        'order_min_days': order_min_days,
+        'order_max_days': order_max_days,
     })
 
 

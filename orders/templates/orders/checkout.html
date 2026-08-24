@@ -61,18 +61,32 @@
             <h3 style="font-size:16px; font-weight:700; margin-bottom:16px;">Order summary</h3>
 
             {% for item in items %}
-            <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:8px;">
+            <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px;">
                 <span>{{ item.product.name }} × {{ item.quantity }}</span>
                 <span>₹{{ item.subtotal }}</span>
+            </div>
+            <div style="font-size:11.5px; color:#a08d6f; margin-bottom:8px;">
+                🚚 Delivery in {{ item.product.delivery_estimate_text }}
             </div>
             {% endfor %}
 
             <div style="border-top:1px dashed #d8c9a3; margin:14px 0;"></div>
 
-            <div style="display:flex; justify-content:space-between; font-size:17px; font-weight:700; margin-bottom:20px;">
+            <div style="display:flex; justify-content:space-between; font-size:17px; font-weight:700; margin-bottom:10px;">
                 <span>Total</span>
                 <span>₹{{ total }}</span>
             </div>
+
+            {% if order_max_days %}
+            <div style="background:#fdf0da; border-radius:8px; padding:10px 12px; font-size:13px; color:#5A4B3E; margin-bottom:18px;">
+                🚚 Your order will arrive in
+                <strong>
+                    {% if order_min_days == order_max_days %}{{ order_max_days }} day{{ order_max_days|pluralize }}
+                    {% else %}{{ order_min_days }}-{{ order_max_days }} days{% endif %}
+                </strong>
+                after payment is confirmed.
+            </div>
+            {% endif %}
 
             <button type="submit" style="width:100%; background:#E8A33D; color:#1a1a1a; font-weight:700; padding:13px; border:none; border-radius:10px; cursor:pointer;">
                 Place order

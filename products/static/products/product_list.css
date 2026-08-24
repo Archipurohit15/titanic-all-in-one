@@ -368,10 +368,16 @@
     gap: 16px;
 }
 
+.product-link,
+.product-link:hover,
+.product-link:visited,
+.product-link * {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
 .product-link {
     display: block;
-    text-decoration: none;
-    color: inherit;
 }
 
 .product-card {
@@ -593,5 +599,3 @@
         grid-template-columns: 1fr;
     }
 }
-
-

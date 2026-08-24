@@ -18,6 +18,7 @@
     <div class="product-grid">
         {% for product in entry.products %}
         <div class="product-card">
+            <a href="{% url 'product_detail' product.id %}" class="product-link">
             <div class="product-image">
                 {% if product.image %}
                     <img src="{{ product.image.url }}" alt="{{ product.name }}">
@@ -30,6 +31,10 @@
             <div class="product-info">
                 <p class="product-name">{{ product.name }}</p>
                 <p class="product-price">₹{{ product.price }}</p>
+            </div>
+            </a>
+            <div class="product-info">
+                <!-- cart controls below stay outside the link so clicks don't navigate away -->
                 <!-- <button class="add-btn">Add to cart</button> -->
                  <div class="cart-control" data-product-id="{{ product.id }}">
     {% if product.cart_qty > 0 %}

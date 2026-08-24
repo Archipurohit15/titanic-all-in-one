@@ -368,6 +368,12 @@
     gap: 16px;
 }
 
+.product-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
 .product-card {
     background: #FFFFFF;
     border: 1px solid var(--brand-border);

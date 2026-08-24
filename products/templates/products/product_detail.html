@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'products/product_detail.css' %}">
+
+<div class="pd-wrap">
+
+    <div class="pd-breadcrumb">
+        <a href="{% url 'product_list' %}">Home</a> /
+        <a href="{% url 'category_detail' product.category.parent.parent.id %}">{{ product.category.parent.parent.name }}</a> /
+        <a href="{% url 'category_detail' product.category.parent.parent.id %}">{{ product.category.parent.name }}</a> /
+        <span>{{ product.name }}</span>
+    </div>
+
+    <div class="pd-main">
+
+        <div class="pd-image-col">
+            <div class="pd-image">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% elif product.auto_image_url %}
+                    <img src="{{ product.auto_image_url }}" alt="{{ product.name }}">
+                {% else %}
+                    <span class="pd-image-placeholder">📦</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="pd-info-col">
+            <p class="pd-category">{{ product.category.name }}</p>
+            <h1 class="pd-name">{{ product.name }}</h1>
+
+            <div class="pd-meta-row">
+                {% if product.stock > 0 %}
+                    <span class="pd-badge in-stock">✓ In Stock</span>
+                {% else %}
+                    <span class="pd-badge out-stock">Out of Stock</span>
+                {% endif %}
+                <span class="pd-sku">Product ID: TIT{{ product.id }}</span>
+            </div>
+
+            <div class="pd-divider"></div>
+
+            <div class="pd-description">
+                <h3>About this item</h3>
+                {% if product.description %}
+                    <p>{{ product.description|linebreaksbr }}</p>
+                {% else %}
+                    <p class="pd-no-desc">No description available for this product yet.</p>
+                {% endif %}
+            </div>
+
+            <div class="pd-divider"></div>
+
+            <!-- <div class="pd-highlights">
+                <h3>Why shop with Titanic</h3>
+                <ul>
+                    <li><span class="pd-hi-icon">🚚</span> Fast local delivery</li>
+                    <li><span class="pd-hi-icon">🔒</span> Secure payments via Razorpay</li>
+                    <li><span class="pd-hi-icon">↩️</span> Easy returns on eligible items</li>
+                </ul>
+            </div> -->
+        </div>
+
+        <div class="pd-buy-col">
+            <div class="pd-buybox">
+                <p class="pd-buy-price">₹{{ product.price }}</p>
+                <p class="pd-buy-tax">Inclusive of all taxes</p>
+
+                {% if product.stock > 0 %}
+                    <p class="pd-buy-stock in-stock">In Stock</p>
+                    <p class="pd-buy-avail">{{ product.stock }} units available</p>
+                {% else %}
+                    <p class="pd-buy-stock out-stock">Currently unavailable</p>
+                {% endif %}
+
+                <div class="pd-divider"></div>
+
+                <div class="pd-cart-control" data-product-id="{{ product.id }}">
+                    {% if product.stock > 0 %}
+                        {% if product.cart_qty > 0 %}
+                            <div class="pd-stepper">
+                                <a href="{% url 'decrease_quantity' product.id %}" class="pd-step-btn">−</a>
+                                <span class="pd-qty-val">{{ product.cart_qty }}</span>
+                                <a href="{% url 'increase_quantity' product.id %}" class="pd-step-btn">+</a>
+                            </div>
+                            <a href="{% url 'view_cart' %}" class="pd-buy-btn">Go to Cart</a>
+                        {% else %}
+                            <a href="{% url 'add_to_cart' product.id %}" class="pd-add-btn">Add to Cart</a>
+                        {% endif %}
+                    {% else %}
+                        <button class="pd-add-btn pd-disabled" disabled>Out of Stock</button>
+                    {% endif %}
+                </div>
+
+                <div class="pd-buy-note">
+                    <p>📍 Sold and delivered by <strong>Titanic</strong></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {% if related_products %}
+    <div class="pd-related">
+        <h2>You might also like</h2>
+        <div class="pd-related-grid">
+            {% for rp in related_products %}
+            <a href="{% url 'product_detail' rp.id %}" class="pd-related-card">
+                <div class="pd-related-image">
+                    {% if rp.image %}
+                        <img src="{{ rp.image.url }}" alt="{{ rp.name }}">
+                    {% elif rp.auto_image_url %}
+                        <img src="{{ rp.auto_image_url }}" alt="{{ rp.name }}">
+                    {% else %}
+                        📦
+                    {% endif %}
+                </div>
+                <p class="pd-related-name">{{ rp.name }}</p>
+                <p class="pd-related-price">₹{{ rp.price }}</p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

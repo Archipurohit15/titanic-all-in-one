@@ -34,6 +34,7 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField(default=0)
+    commission_percent = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     image = models.ImageField(upload_to='products/', blank=True, null=True)
     auto_image_url = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)

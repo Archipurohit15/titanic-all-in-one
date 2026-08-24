@@ -18,10 +18,10 @@ class CategoriesAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('thumbnail', 'name', 'category', 'price', 'stock')
+    list_display = ('thumbnail', 'name', 'category', 'price', 'stock', 'commission_percent')
     list_filter = ('category',)
     search_fields = ('name',)
-    list_editable = ('price', 'stock')
+    list_editable = ('price', 'stock', 'commission_percent')
 
     def thumbnail(self, obj):
         if obj.image:

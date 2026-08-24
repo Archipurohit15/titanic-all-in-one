@@ -12,6 +12,19 @@ def product_list(request):
     return render(request, 'products/product_list.html', {'sections': sections})
 
 
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    cart = request.session.get('cart', {})
+    product.cart_qty = cart.get(str(product.id), 0)
+
+    related_products = Product.objects.filter(category=product.category).exclude(id=product.id)[:4]
+
+    return render(request, 'products/product_detail.html', {
+        'product': product,
+        'related_products': related_products,
+    })
+
+
 def category_detail(request, category_id):
     department = get_object_or_404(Categories, id=category_id, parent=None)
     groups = department.children.all()

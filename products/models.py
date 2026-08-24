@@ -38,6 +38,7 @@ class Product(models.Model):
     auto_image_url = models.URLField(blank=True, null=True)
     min_delivery_days = models.PositiveIntegerField(default=3, help_text="Minimum days for delivery (e.g. 3)")
     max_delivery_days = models.PositiveIntegerField(default=7, help_text="Maximum days for delivery (e.g. 7)")
+    commission_percent = models.DecimalField(max_digits=5, decimal_places=2, default=0, help_text="Agent commission % earned on this product")
     created_at = models.DateTimeField(auto_now_add=True)
 
     @property

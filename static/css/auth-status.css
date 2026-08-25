@@ -1,0 +1,53 @@
+/* ---------- Auth status cards (password reset done / complete) ---------- */
+
+.auth-status-wrap {
+    max-width: 480px;
+    margin: 70px auto;
+    padding: 0 20px;
+}
+
+.auth-status-card {
+    background: var(--brand-bg-light);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+    padding: 48px 40px;
+    text-align: center;
+}
+
+.auth-status-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 22px;
+    background: linear-gradient(160deg, var(--brand-bg-warm) 0%, var(--brand-accent-light) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: var(--brand-primary);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.auth-status-card h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--brand-text-dark);
+    margin-bottom: 10px;
+}
+
+.auth-status-card p {
+    font-size: 14px;
+    color: var(--brand-primary);
+    opacity: 0.85;
+    line-height: 1.6;
+    margin-bottom: 26px;
+}
+
+.auth-status-card .login-toggle-btn {
+    display: inline-flex;
+}
+
+@media (max-width: 480px) {
+    .auth-status-wrap { margin: 40px auto; }
+    .auth-status-card { padding: 36px 24px; }
+}

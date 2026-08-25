@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'products/product_list.css' %}">
+
+<div class="category-section">
+    <div class="section-header">
+        <h2>
+            {% if query %}
+                Search results for "{{ query }}"
+            {% else %}
+                Search
+            {% endif %}
+        </h2>
+    </div>
+</div>
+
+<div class="category-section">
+    {% if not query %}
+    <p style="font-size: 13px; color: #A69A8C;">Kuch search karo — jaise "atta" ya "phone".</p>
+    {% elif products %}
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="product-card">
+            <a href="{% url 'product_detail' product.id %}" class="product-link">
+            <div class="product-image">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% elif product.auto_image_url %}
+                    <img src="{{ product.auto_image_url }}" alt="{{ product.name }}">
+                {% else %}
+                    📦
+                {% endif %}
+            </div>
+            <div class="product-info">
+                <p class="product-name">{{ product.name }}</p>
+                <p class="product-price">₹{{ product.price }}</p>
+            </div>
+            </a>
+            <div class="product-info">
+                <div class="cart-control" data-product-id="{{ product.id }}">
+                    {% if product.cart_qty > 0 %}
+                        <div class="stepper">
+                            <a href="{% url 'decrease_quantity' product.id %}" class="step-btn dec">−</a>
+                            <span class="qty-val">{{ product.cart_qty }}</span>
+                            <a href="{% url 'increase_quantity' product.id %}" class="step-btn inc">+</a>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'add_to_cart' product.id %}" class="add-btn">Add to cart</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p style="font-size: 13px; color: #A69A8C;">"{{ query }}" ke liye koi product nahi mila. Kuch aur try karo.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
 from .models import Product, Categories
 
 def product_list(request):
@@ -40,4 +41,24 @@ def category_detail(request, category_id):
     return render(request, 'products/category_detail.html', {
         'department': department,
         'group_sections': group_sections,
+    })
+
+
+def search_results(request):
+    query = request.GET.get('q', '').strip()
+    cart = request.session.get('cart', {})
+    products = []
+
+    if query:
+        products = list(
+            Product.objects.filter(
+                Q(name__icontains=query) | Q(description__icontains=query) | Q(category__name__icontains=query)
+            ).distinct()
+        )
+        for p in products:
+            p.cart_qty = cart.get(str(p.id), 0)
+
+    return render(request, 'products/search_results.html', {
+        'query': query,
+        'products': products,
     })

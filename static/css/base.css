@@ -35,8 +35,13 @@ body {
     box-shadow: 0 8px 24px -8px rgba(122, 70, 50, 0.45);
 }
 
+.navbar a{
+    text-decoration: none;
+}
 .logo {
     flex-shrink: 0;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .logo-text {
@@ -173,6 +178,12 @@ body {
     gap: 26px;
     background: #3c2b22ef;
     padding: 10px 28px;
+}
+
+.cat-links-scroll {
+    display: flex;
+    align-items: center;
+    gap: 26px;
 }
 
 .cat-all-wrap {
@@ -313,13 +324,17 @@ body {
     .category-bar {
         padding: 10px 16px;
         gap: 18px;
+    }
+
+    .cat-links-scroll {
+        gap: 18px;
         overflow-x: auto;
         white-space: nowrap;
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
 
-    .category-bar::-webkit-scrollbar {
+    .cat-links-scroll::-webkit-scrollbar {
         display: none;
     }
 

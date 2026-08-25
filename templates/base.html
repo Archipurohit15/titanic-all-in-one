@@ -14,14 +14,14 @@
 <body>
 
 <nav class="navbar">
-    <div class="logo">
+    <a href="{% url 'product_list' %}" class="logo">
         <span class="logo-text">TITAN<span class="logo-accent">IC<span class="logo-dot"></span></span></span>
-    </div>
+    </a>
 
-    <div class="search-bar">
-        <input type="text" placeholder="Search products...">
-        <button class="search-btn"><i class="ti ti-search"></i></button>
-    </div>
+    <form class="search-bar" action="{% url 'search_results' %}" method="GET">
+        <input type="text" name="q" placeholder="Search products..." value="{{ request.GET.q }}">
+        <button type="submit" class="search-btn"><i class="ti ti-search"></i></button>
+    </form>
 
     <div class="nav-actions">
         <a href="{% url 'agent_signup' %}" class="agent-btn">
@@ -76,18 +76,20 @@
             {% endif %}
         </div>
     </div>
-    {% if featured_categories.fmcg %}
-    <a href="{% url 'category_detail' featured_categories.fmcg.id %}" class="cat-link"> Personal Care & Household</a>
-    {% endif %}
-    {% if featured_categories.groceries %}
-    <a href="{% url 'category_detail' featured_categories.groceries.id %}" class="cat-link">Groceries</a>
-    {% endif %}
-    {% if featured_categories.electronics %}
-    <a href="{% url 'category_detail' featured_categories.electronics.id %}" class="cat-link">Electronics</a>
-    {% endif %}
-    {% if featured_categories.electricals %}
-    <a href="{% url 'category_detail' featured_categories.electricals.id %}" class="cat-link">Electrical</a>
-    {% endif %}
+    <div class="cat-links-scroll">
+        {% if featured_categories.fmcg %}
+        <a href="{% url 'category_detail' featured_categories.fmcg.id %}" class="cat-link"> Personal Care & Household</a>
+        {% endif %}
+        {% if featured_categories.groceries %}
+        <a href="{% url 'category_detail' featured_categories.groceries.id %}" class="cat-link">Groceries</a>
+        {% endif %}
+        {% if featured_categories.electronics %}
+        <a href="{% url 'category_detail' featured_categories.electronics.id %}" class="cat-link">Electronics</a>
+        {% endif %}
+        {% if featured_categories.electricals %}
+        <a href="{% url 'category_detail' featured_categories.electricals.id %}" class="cat-link">Electrical</a>
+        {% endif %}
+    </div>
 </div>
 
 <div id="toast" class="toast"></div>

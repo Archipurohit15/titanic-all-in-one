@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.conf import settings
 from django.contrib import messages
+from datetime import timedelta
 import razorpay
 from products.models import Product
 from agents.models import Agent
@@ -234,7 +235,26 @@ def retry_payment(request, order_id):
 def order_success(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     total = sum(item.price_at_purchase * item.quantity for item in order.items.all())
-    return render(request, 'orders/order_success.html', {'order': order, 'total': total})
+
+    items = list(order.items.all())
+    estimated_delivery_start = None
+    estimated_delivery_end = None
+    if items:
+        order_min_days = max(item.product.min_delivery_days for item in items)
+        order_max_days = max(item.product.max_delivery_days for item in items)
+        estimated_delivery_start = order.created_at + timedelta(days=order_min_days)
+        estimated_delivery_end = order.created_at + timedelta(days=order_max_days)
+    else:
+        order_min_days = order_max_days = None
+
+    return render(request, 'orders/order_success.html', {
+        'order': order,
+        'total': total,
+        'order_min_days': order_min_days,
+        'order_max_days': order_max_days,
+        'estimated_delivery_start': estimated_delivery_start,
+        'estimated_delivery_end': estimated_delivery_end,
+    })
 
 def verify_delivery(request):
     error = None

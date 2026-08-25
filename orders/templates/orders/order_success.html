@@ -71,6 +71,18 @@
                 <span>Status</span>
                 <span class="status-pending">{{ order.status|capfirst }}</span>
             </div>
+            {% if estimated_delivery_start %}
+            <div class="detail-row">
+                <span>Estimated Delivery</span>
+                <span>
+                    {% if estimated_delivery_start.date == estimated_delivery_end.date %}
+                        {{ estimated_delivery_start|date:"d M Y" }}
+                    {% else %}
+                        {{ estimated_delivery_start|date:"d M" }} – {{ estimated_delivery_end|date:"d M Y" }}
+                    {% endif %}
+                </span>
+            </div>
+            {% endif %}
 
             <div class="divider"></div>
 
@@ -83,6 +95,20 @@
         </div>
 
     </div>
+
+    {% if estimated_delivery_start and order.status != 'delivered' %}
+    <div class="delivery-est-box">
+        <h3>🚚 Estimated Delivery</h3>
+        <p class="delivery-est-dates">
+            {% if estimated_delivery_start.date == estimated_delivery_end.date %}
+                {{ estimated_delivery_start|date:"l, d M Y" }}
+            {% else %}
+                {{ estimated_delivery_start|date:"d M" }} – {{ estimated_delivery_end|date:"d M Y" }}
+            {% endif %}
+        </p>
+        <p class="delivery-est-note">Your parcel usually arrives within {{ order_min_days }}-{{ order_max_days }} days of the order being placed. Actual delivery may vary slightly.</p>
+    </div>
+    {% endif %}
 
     {% if order.status == 'shipped' and order.delivery_otp %}
 <div class="otp-box">

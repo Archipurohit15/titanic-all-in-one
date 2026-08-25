@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 /* HERO SECTION */
 .hero {
     background: var(--brand-bg-warm);
@@ -106,6 +110,7 @@
     font-weight: 700;
     font-size: 13.5px;
     cursor: pointer;
+    text-decoration: none;
     box-shadow: 0 8px 20px -6px rgba(201, 151, 63, 0.6);
 }
 

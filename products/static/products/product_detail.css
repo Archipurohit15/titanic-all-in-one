@@ -179,6 +179,66 @@
     margin: 0 0 16px;
 }
 
+.price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.price-pill-lg {
+    display: inline-block;
+    background: var(--brand-instock);
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    padding: 8px 18px;
+    border-radius: 8px;
+    line-height: 1.2;
+}
+
+.mrp-strike {
+    font-size: 13px;
+    color: #A69A8C;
+    text-decoration: line-through;
+}
+
+.discount-badge {
+    display: inline-block;
+    background: none;
+    color: var(--brand-instock);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 0;
+}
+
+.pd-mrp-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 16px;
+}
+
+.pd-mrp-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #A69A8C;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.pd-tax-note {
+    font-size: 12px;
+    color: #A69A8C;
+}
+
+.pd-divider-thin {
+    border-top: 1px solid var(--brand-border);
+    margin: 0 0 16px;
+}
+
 .pd-buy-stock {
     font-size: 15px;
     font-weight: 600;

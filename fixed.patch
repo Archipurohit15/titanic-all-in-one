@@ -1,0 +1,119 @@
+diff --git a/products/models.py b/products/models.py
+index 121f4d8..8462065 100644
+--- a/products/models.py
++++ b/products/models.py
+@@ -52,6 +52,12 @@ class Product(models.Model):
+             return round(((self.mrp - self.price) / self.mrp) * 100)
+         return 0
+ 
++    @property
++    def discount_amount(self):
++        if self.has_discount:
++            return self.mrp - self.price
++        return 0
++
+     @property
+     def delivery_estimate_text(self):
+         if self.min_delivery_days == self.max_delivery_days:
+diff --git a/products/static/products/product_detail.css b/products/static/products/product_detail.css
+index f277d24..2ed4f54 100644
+--- a/products/static/products/product_detail.css
++++ b/products/static/products/product_detail.css
+@@ -179,6 +179,66 @@
+     margin: 0 0 16px;
+ }
+ 
++.price-row {
++    display: flex;
++    align-items: baseline;
++    gap: 8px;
++    margin-bottom: 6px;
++}
++
++.price-pill-lg {
++    display: inline-block;
++    background: var(--brand-instock);
++    color: #FFFFFF;
++    font-family: 'Poppins', sans-serif;
++    font-weight: 700;
++    font-size: 22px;
++    padding: 8px 18px;
++    border-radius: 8px;
++    line-height: 1.2;
++}
++
++.mrp-strike {
++    font-size: 13px;
++    color: #A69A8C;
++    text-decoration: line-through;
++}
++
++.discount-badge {
++    display: inline-block;
++    background: none;
++    color: var(--brand-instock);
++    font-weight: 700;
++    font-size: 13px;
++    padding: 0;
++}
++
++.pd-mrp-row {
++    display: flex;
++    flex-wrap: wrap;
++    align-items: center;
++    gap: 8px;
++    margin: 0 0 16px;
++}
++
++.pd-mrp-label {
++    font-size: 12px;
++    font-weight: 600;
++    color: #A69A8C;
++    text-transform: uppercase;
++    letter-spacing: 0.3px;
++}
++
++.pd-tax-note {
++    font-size: 12px;
++    color: #A69A8C;
++}
++
++.pd-divider-thin {
++    border-top: 1px solid var(--brand-border);
++    margin: 0 0 16px;
++}
++
+ .pd-buy-stock {
+     font-size: 15px;
+     font-weight: 600;
+diff --git a/products/templates/products/product_detail.html b/products/templates/products/product_detail.html
+index 52c95d7..0b20499 100644
+--- a/products/templates/products/product_detail.html
++++ b/products/templates/products/product_detail.html
+@@ -67,17 +67,19 @@
+             <div class="pd-buybox">
+                 <div class="price-row">
+                     <span class="price-pill-lg">₹{{ product.price }}</span>
+-                    {% if product.has_discount %}
+-                        <span class="mrp-strike">₹{{ product.mrp }}</span>
+-                    {% endif %}
+                 </div>
+                 {% if product.has_discount %}
+-                <div class="discount-line">
+-                    <span class="discount-badge">{{ product.discount_percent }}% OFF</span>
+-                    <span class="discount-dots"></span>
++                <div class="pd-mrp-row">
++                    <span class="pd-mrp-label">MRP</span>
++                    <span class="mrp-strike">₹{{ product.mrp }}</span>
++                    <span class="pd-tax-note">(incl. of all taxes)</span>
++                    <span class="discount-badge">₹{{ product.discount_amount }} OFF</span>
+                 </div>
+-                {% endif %}
++                {% else %}
+                 <p class="pd-buy-tax">Inclusive of all taxes</p>
++                {% endif %}
++
++                <div class="pd-divider-thin"></div>
+ 
+                 {% if product.stock > 0 %}
+                     <p class="pd-buy-stock in-stock">In Stock</p>

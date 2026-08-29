@@ -53,6 +53,12 @@ class Product(models.Model):
         return 0
 
     @property
+    def discount_amount(self):
+        if self.has_discount:
+            return self.mrp - self.price
+        return 0
+
+    @property
     def delivery_estimate_text(self):
         if self.min_delivery_days == self.max_delivery_days:
             return f"{self.min_delivery_days} day{'s' if self.min_delivery_days != 1 else ''}"

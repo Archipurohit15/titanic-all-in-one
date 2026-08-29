@@ -65,7 +65,16 @@
 
         <div class="pd-buy-col">
             <div class="pd-buybox">
-                <p class="pd-buy-price">₹{{ product.price }}</p>
+                <!-- <p class="pd-buy-price">₹{{ product.price }}</p> -->
+                <div class="price-row">
+    <span class="product-price">₹{{ product.price }}</span>
+    {% if product.has_discount %}
+        <span class="mrp-strike">₹{{ product.mrp }}</span>
+    {% endif %}
+</div>
+{% if product.has_discount %}
+    <span class="discount-badge">{{ product.discount_percent }}% OFF</span>
+{% endif %}
                 <p class="pd-buy-tax">Inclusive of all taxes</p>
 
                 {% if product.stock > 0 %}

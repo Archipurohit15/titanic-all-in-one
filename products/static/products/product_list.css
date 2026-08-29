@@ -444,6 +444,30 @@ html {
 }
 
 
+.price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.mrp-strike {
+    font-size: 11px;
+    color: #A69A8C;
+    text-decoration: line-through;
+}
+
+.discount-badge {
+    display: inline-block;
+    background: var(--brand-discount);
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
 
 
 

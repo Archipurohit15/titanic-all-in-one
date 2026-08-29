@@ -30,7 +30,16 @@
             </div>
             <div class="product-info">
                 <p class="product-name">{{ product.name }}</p>
-                <p class="product-price">₹{{ product.price }}</p>
+                <!-- <p class="product-price">₹{{ product.price }}</p> -->
+                 <div class="price-row">
+    <span class="product-price">₹{{ product.price }}</span>
+    {% if product.has_discount %}
+        <span class="mrp-strike">₹{{ product.mrp }}</span>
+    {% endif %}
+</div>
+{% if product.has_discount %}
+    <span class="discount-badge">{{ product.discount_percent }}% OFF</span>
+{% endif %}
             </div>
             </a>
             <div class="product-info">

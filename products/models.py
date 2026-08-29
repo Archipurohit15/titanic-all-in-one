@@ -32,7 +32,8 @@ class Product(models.Model):
     category = models.ForeignKey(Categories, on_delete=models.CASCADE, related_name='products')
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    mrp = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, help_text="Original price (MRP) — chhodo khaali agar discount nahi dena")
+    price = models.DecimalField(max_digits=10, decimal_places=2, help_text="Selling price — jo customer actually pay karega")
     stock = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='products/', blank=True, null=True)
     auto_image_url = models.URLField(blank=True, null=True)
@@ -40,6 +41,16 @@ class Product(models.Model):
     max_delivery_days = models.PositiveIntegerField(default=7, help_text="Maximum days for delivery (e.g. 7)")
     commission_percent = models.DecimalField(max_digits=5, decimal_places=2, default=0, help_text="Agent commission % earned on this product")
     created_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def has_discount(self):
+        return self.mrp and self.mrp > self.price
+
+    @property
+    def discount_percent(self):
+        if self.has_discount:
+            return round(((self.mrp - self.price) / self.mrp) * 100)
+        return 0
 
     @property
     def delivery_estimate_text(self):

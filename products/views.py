@@ -18,10 +18,22 @@ def product_detail(request, product_id):
     cart = request.session.get('cart', {})
     product.cart_qty = cart.get(str(product.id), 0)
 
+     # Breadcrumb trail — chahe category kitni bhi deep/flat ho, safe tareeke se build karo
+    trail = []
+    node = product.category
+    while node:
+        trail.append(node)
+        node = node.parent
+    trail.reverse()  # ab trail[0] = department (sabse upar), aakhri = product ki khud ki category
+
+    department = trail[0]
+
     related_products = Product.objects.filter(category=product.category).exclude(id=product.id)[:4]
 
     return render(request, 'products/product_detail.html', {
         'product': product,
+        'department': department,
+        'breadcrumb_trail': trail,
         'related_products': related_products,
     })
 

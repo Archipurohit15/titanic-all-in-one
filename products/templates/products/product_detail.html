@@ -7,11 +7,13 @@
 <div class="pd-wrap">
 
     <div class="pd-breadcrumb">
-        <a href="{% url 'product_list' %}">Home</a> /
-        <a href="{% url 'category_detail' product.category.parent.parent.id %}">{{ product.category.parent.parent.name }}</a> /
-        <a href="{% url 'category_detail' product.category.parent.parent.id %}">{{ product.category.parent.name }}</a> /
-        <span>{{ product.name }}</span>
-    </div>
+    <a href="{% url 'product_list' %}">Home</a> /
+    <a href="{% url 'category_detail' department.id %}">{{ department.name }}</a>
+    {% for node in breadcrumb_trail %}
+        {% if not forloop.first %}/ {{ node.name }}{% endif %}
+    {% endfor %}
+    / {{ product.name }}
+</div>
 
     <div class="pd-main">
 

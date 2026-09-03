@@ -33,9 +33,16 @@ def category_detail(request, category_id):
 
     group_sections = []
     for group in groups:
-        products = list(Product.objects.filter(category__parent=group))
+        if group.children.exists():
+            # Ye ek real "group" hai (jaise FMCG -> Bath & Body) - iske andar items hain
+            products = list(Product.objects.filter(category__parent=group))
+        else:
+            # Ye seedha ek "item" hai jo department ke neeche flat hai (jaise Electrical -> POP Light)
+            products = list(Product.objects.filter(category=group))
+
         for p in products:
             p.cart_qty = cart.get(str(p.id), 0)
+
         group_sections.append({'group': group, 'products': products})
 
     return render(request, 'products/category_detail.html', {

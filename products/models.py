@@ -40,6 +40,18 @@ class Product(models.Model):
     min_delivery_days = models.PositiveIntegerField(default=3, help_text="Minimum days for delivery (e.g. 3)")
     max_delivery_days = models.PositiveIntegerField(default=7, help_text="Maximum days for delivery (e.g. 7)")
     commission_percent = models.DecimalField(max_digits=5, decimal_places=2, default=0, help_text="Agent commission % earned on this product")
+    variant_of = models.ForeignKey(
+        'self', null=True, blank=True, on_delete=models.SET_NULL, related_name='variants',
+        help_text="Agar ye kisi product ka variant (color/size/wattage/capacity) hai, us 'main' product ko yahan select karo"
+    )
+    variant_type = models.CharField(
+        max_length=30, blank=True,
+        help_text="Variant ka naam — jaise: Wattage, Capacity, Colour, Size (sabhi variants mein same rakhna)"
+    )
+    variant_label = models.CharField(
+        max_length=50, blank=True,
+        help_text="Is specific product ka variant value — jaise: '10 Watt', '15L', 'Cocoa Brown'"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     
 
@@ -64,6 +76,16 @@ class Product(models.Model):
         if self.min_delivery_days == self.max_delivery_days:
             return f"{self.min_delivery_days} day{'s' if self.min_delivery_days != 1 else ''}"
         return f"{self.min_delivery_days}-{self.max_delivery_days} days"
+
+    @property
+    def variant_family(self):
+        """
+        Isi product ke saare variants return karta hai (khud ko bhi milaake) —
+        chahe wo color ho, wattage ho, ya capacity (litre) — kuch bhi.
+        """
+        main_product = self.variant_of or self
+        family = [main_product] + list(main_product.variants.all())
+        return family
 
     def save(self, *args, **kwargs):
         if not self.image and not self.auto_image_url:

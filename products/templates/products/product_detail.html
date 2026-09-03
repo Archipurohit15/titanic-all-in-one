@@ -55,6 +55,29 @@
 
             <div class="pd-divider"></div>
 
+            {% if product.variant_family|length > 1 %}
+            <div class="pd-variants">
+                <h3>{{ product.variant_type|default:"Options" }}: <span class="pd-current-variant">{{ product.variant_label|default:"—" }}</span></h3>
+                <div class="pd-variant-row">
+                    {% for variant in product.variant_family %}
+                    <a href="{% url 'product_detail' variant.id %}"
+                       class="pd-variant-card {% if variant.id == product.id %}active{% endif %} {% if variant.stock == 0 %}oos{% endif %}">
+                        <span class="pd-variant-card-label">{{ variant.variant_label|default:"Default" }}</span>
+                        <span class="pd-variant-card-price">₹{{ variant.price }}</span>
+                        {% if variant.has_discount %}
+                            <span class="pd-variant-card-mrp">₹{{ variant.mrp }}</span>
+                        {% endif %}
+                        <span class="pd-variant-card-stock">
+                            {% if variant.stock > 0 %}In stock{% else %}Out of stock{% endif %}
+                        </span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="pd-divider"></div>
+            {% endif %}
+
             <!-- <div class="pd-highlights">
                 <h3>Why shop with Titanic</h3>
                 <ul>

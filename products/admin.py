@@ -18,10 +18,11 @@ class CategoriesAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('thumbnail', 'name', 'category', 'price', 'stock', 'commission_percent', 'min_delivery_days', 'max_delivery_days')
-    list_filter = ('category',)
-    search_fields = ('name',)
+    list_display = ('thumbnail', 'name', 'category', 'variant_type', 'variant_label', 'variant_of', 'price', 'stock', 'commission_percent', 'min_delivery_days', 'max_delivery_days')
+    list_filter = ('category', 'variant_type')
+    search_fields = ('name', 'variant_label')
     list_editable = ('price', 'stock', 'commission_percent', 'min_delivery_days', 'max_delivery_days')
+    autocomplete_fields = ('variant_of',)
 
     def thumbnail(self, obj):
         if obj.image:

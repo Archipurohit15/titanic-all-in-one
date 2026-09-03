@@ -26,24 +26,36 @@ def product_detail(request, product_id):
     })
 
 
+def get_leaf_categories(department):
+    """Department ke andar jitni bhi deep-nested categories hain, sirf leaf-level (jinka koi child nahi) wapas karo."""
+    leaves = []
+
+    def collect(category):
+        children = category.children.all()
+        if children.exists():
+            for child in children:
+                collect(child)
+        else:
+            leaves.append(category)
+
+    for top_child in department.children.all():
+        collect(top_child)
+
+    return leaves
+
+
 def category_detail(request, category_id):
     department = get_object_or_404(Categories, id=category_id, parent=None)
-    groups = department.children.all()
     cart = request.session.get('cart', {})
 
-    group_sections = []
-    for group in groups:
-        if group.children.exists():
-            # Ye ek real "group" hai (jaise FMCG -> Bath & Body) - iske andar items hain
-            products = list(Product.objects.filter(category__parent=group))
-        else:
-            # Ye seedha ek "item" hai jo department ke neeche flat hai (jaise Electrical -> POP Light)
-            products = list(Product.objects.filter(category=group))
+    leaf_categories = get_leaf_categories(department)
 
+    group_sections = []
+    for leaf in leaf_categories:
+        products = list(Product.objects.filter(category=leaf))
         for p in products:
             p.cart_qty = cart.get(str(p.id), 0)
-
-        group_sections.append({'group': group, 'products': products})
+        group_sections.append({'group': leaf, 'products': products})
 
     return render(request, 'products/category_detail.html', {
         'department': department,

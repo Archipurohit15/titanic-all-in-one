@@ -1,0 +1,32 @@
+diff --git a/products/views.py b/products/views.py
+index ec932f0..16963c0 100644
+--- a/products/views.py
++++ b/products/views.py
+@@ -28,7 +28,7 @@ def product_detail(request, product_id):
+ 
+     department = trail[0]
+ 
+-    related_products = Product.objects.filter(category=product.category).exclude(id=product.id)[:4]
++    related_products = Product.objects.filter(category=product.category, variant_of__isnull=True).exclude(id=product.id).exclude(id=product.variant_of_id)[:4]
+ 
+     return render(request, 'products/product_detail.html', {
+         'product': product,
+@@ -64,7 +64,7 @@ def category_detail(request, category_id):
+ 
+     group_sections = []
+     for leaf in leaf_categories:
+-        products = list(Product.objects.filter(category=leaf))
++        products = list(Product.objects.filter(category=leaf, variant_of__isnull=True))
+         for p in products:
+             p.cart_qty = cart.get(str(p.id), 0)
+         group_sections.append({'group': leaf, 'products': products})
+@@ -83,7 +83,8 @@ def search_results(request):
+     if query:
+         products = list(
+             Product.objects.filter(
+-                Q(name__icontains=query) | Q(description__icontains=query) | Q(category__name__icontains=query)
++                Q(name__icontains=query) | Q(description__icontains=query) | Q(category__name__icontains=query),
++                variant_of__isnull=True
+             ).distinct()
+         )
+         for p in products:

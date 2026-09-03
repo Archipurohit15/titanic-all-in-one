@@ -18,6 +18,7 @@ class CategoriesAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    save_as = True  # "Save as new" button — existing product ki details copy karke naya variant fatafat bana sakti ho
     list_display = ('thumbnail', 'name', 'category', 'variant_type', 'variant_label', 'variant_of', 'price', 'stock', 'commission_percent', 'min_delivery_days', 'max_delivery_days')
     list_filter = ('category', 'variant_type')
     search_fields = ('name', 'variant_label')

@@ -62,7 +62,7 @@
 
             {% for item in items %}
             <div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:4px;">
-                <span>{{ item.product.name }} × {{ item.quantity }}</span>
+                <span>{{ item.product.name }}{% if item.product.variant_label %} ({{ item.product.variant_label }}){% endif %} × {{ item.quantity }}</span>
                 <span>₹{{ item.subtotal }}</span>
             </div>
             <div style="font-size:11.5px; color:#a08d6f; margin-bottom:8px;">

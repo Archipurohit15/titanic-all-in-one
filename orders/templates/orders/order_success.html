@@ -43,7 +43,7 @@
             {% endif %}
         </div>
         <div>
-            <p class="item-name">{{ item.product.name }}</p>
+            <p class="item-name">{{ item.product.name }}{% if item.product.variant_label %} <span style="color:#A69A8C; font-weight:400;">({{ item.product.variant_label }})</span>{% endif %}</p>
             <p class="item-qty">Qty: {{ item.quantity }}</p>
         </div>
     </div>

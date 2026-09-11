@@ -44,7 +44,7 @@
                                     {% endif %}
                                 </div>
                                 <div>
-                                    <p class="cart-product-name">{{ item.product.name }}</p>
+                                    <p class="cart-product-name">{{ item.product.name }}{% if item.product.variant_label %} <span style="color:#A69A8C; font-weight:400;">({{ item.product.variant_label }})</span>{% endif %}</p>
                                     <span class="cart-product-tag">{{ item.product.category.name }}</span>
                                 </div>
                             </div>

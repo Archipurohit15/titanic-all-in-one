@@ -5,6 +5,12 @@ from .models import Order, OrderItem
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     extra = 0
+    readonly_fields = ('product_display',)
+    fields = ('product_display', 'product', 'quantity', 'price_at_purchase')
+
+    def product_display(self, obj):
+        return obj.product.display_name
+    product_display.short_description = "Product (with variant)"
 
 
 @admin.register(Order)

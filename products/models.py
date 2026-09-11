@@ -87,6 +87,17 @@ class Product(models.Model):
         family = [main_product] + list(main_product.variants.all())
         return family
 
+    @property
+    def display_name(self):
+        """
+        Product ka naam, agar variant hai to uska label bhi saath mein —
+        jaise 'LED Bulb (9 Watt)' — taaki order/cart mein confusion na ho
+        ki kaunsa variant hai.
+        """
+        if self.variant_label:
+            return f"{self.name} ({self.variant_label})"
+        return self.name
+
     def save(self, *args, **kwargs):
         if not self.image and not self.auto_image_url:
             self.auto_image_url = fetch_image_for(self.name)

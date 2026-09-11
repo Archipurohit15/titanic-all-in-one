@@ -35,6 +35,23 @@
     </div>
 
 <div class="sbc-grid">
+
+         <div class="sbc-card sbc-electricals">
+            <h3>Electricals</h3>
+            <div class="sbc-img"><img src="{% static 'products/electricals.png' %}" alt="Electricals"></div>
+            {% if featured_categories.electricals %}
+            <a href="{% url 'category_detail' featured_categories.electricals.id %}" class="sbc-btn">Shop Electricals <i class="ti ti-arrow-right"></i></a>
+            {% endif %}
+        </div>
+
+        <div class="sbc-card sbc-electronics">
+            <h3>Electronics</h3>
+            <div class="sbc-img"><img src="{% static 'products/electronics.png' %}" alt="   Electronics"></div>
+            {% if featured_categories.electronics %}
+            <a href="{% url 'category_detail' featured_categories.electronics.id %}" class="sbc-btn">Shop Electronics <i class="ti ti-arrow-right"></i></a>
+            {% endif %}
+        </div>
+
         <div class="sbc-card sbc-fmcg">
             <h3>Industrial</h3>
             <div class="sbc-img"> <img src="{% static 'products/industrial.png' %}" alt="Industrial"> </div>
@@ -51,21 +68,9 @@
             {% endif %}
         </div>
 
-        <div class="sbc-card sbc-electronics">
-            <h3>Electronics</h3>
-            <div class="sbc-img"><img src="{% static 'products/electronics.png' %}" alt="   Electronics"></div>
-            {% if featured_categories.electronics %}
-            <a href="{% url 'category_detail' featured_categories.electronics.id %}" class="sbc-btn">Shop Electronics <i class="ti ti-arrow-right"></i></a>
-            {% endif %}
-        </div>
+        
 
-        <div class="sbc-card sbc-electricals">
-            <h3>Electricals</h3>
-            <div class="sbc-img"><img src="{% static 'products/electricals.png' %}" alt="Electricals"></div>
-            {% if featured_categories.electricals %}
-            <a href="{% url 'category_detail' featured_categories.electricals.id %}" class="sbc-btn">Shop Electricals <i class="ti ti-arrow-right"></i></a>
-            {% endif %}
-        </div>
+       
     </div>
 </section>
 

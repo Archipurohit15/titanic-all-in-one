@@ -77,11 +77,11 @@
         </div>
     </div>
     <div class="cat-links-scroll">
-        {% if featured_categories.fmcg %}
-        <a href="{% url 'category_detail' featured_categories.fmcg.id %}" class="cat-link"> Personal Care & Household</a>
+        {% if featured_categories.industrial %}
+        <a href="{% url 'category_detail' featured_categories.industrial.id %}" class="cat-link">Industrial</a>
         {% endif %}
-        {% if featured_categories.groceries %}
-        <a href="{% url 'category_detail' featured_categories.groceries.id %}" class="cat-link">Groceries</a>
+        {% if featured_categories.tools %}
+        <a href="{% url 'category_detail' featured_categories.tools.id %}" class="cat-link">Tools</a>
         {% endif %}
         {% if featured_categories.electronics %}
         <a href="{% url 'category_detail' featured_categories.electronics.id %}" class="cat-link">Electronics</a>
@@ -123,8 +123,8 @@
             <div class="footer-col">
                 <h4>Categories</h4>
                 <ul>
-                    <li><a href="#">FMCG</a></li>
-                    <li><a href="#">Groceries</a></li>
+                    <li><a href="#">Industrial</a></li>
+                    <li><a href="#">Tools</a></li>
                     <li><a href="#">Electronics</a></li>
                     <li><a href="#">Electricals</a></li>
                 </ul>

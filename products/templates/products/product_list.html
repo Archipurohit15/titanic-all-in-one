@@ -36,18 +36,18 @@
 
 <div class="sbc-grid">
         <div class="sbc-card sbc-fmcg">
-            <h3> Personal Care & Household</h3>
-            <div class="sbc-img"> <img src="{% static 'products/fmcg.png' %}" alt="Personal Care & Household"> </div>
-            {% if featured_categories.fmcg %}
-            <a href="{% url 'category_detail' featured_categories.fmcg.id %}" class="sbc-btn">Shop Personal Care & Hoousehold <i class="ti ti-arrow-right"></i></a>
+            <h3>Industrial</h3>
+            <div class="sbc-img"> <img src="{% static 'products/industrial.png' %}" alt="Industrial"> </div>
+            {% if featured_categories.industrial %}
+            <a href="{% url 'category_detail' featured_categories.industrial.id %}" class="sbc-btn">Shop Industrial <i class="ti ti-arrow-right"></i></a>
             {% endif %}
         </div>
 
         <div class="sbc-card sbc-groceries">
-            <h3>Groceries</h3>
-            <div class="sbc-img"><img src="{% static 'products/groceries.png' %}" alt="Groceries"></div>
-            {% if featured_categories.groceries %}
-            <a href="{% url 'category_detail' featured_categories.groceries.id %}" class="sbc-btn">Shop Groceries <i class="ti ti-arrow-right"></i></a>
+            <h3>Tools</h3>
+            <div class="sbc-img"><img src="{% static 'products/tools.png' %}" alt="Tools"></div>
+            {% if featured_categories.tools %}
+            <a href="{% url 'category_detail' featured_categories.tools.id %}" class="sbc-btn">Shop Tools <i class="ti ti-arrow-right"></i></a>
             {% endif %}
         </div>
 

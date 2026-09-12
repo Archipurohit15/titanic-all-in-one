@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="max-width:520px; margin:70px auto 90px; padding:0 20px; text-align:center;">
+
+    <div style="font-family:'Poppins',sans-serif; font-size:96px; font-weight:700; line-height:1; color:var(--brand-accent); letter-spacing:2px;">
+        404
+    </div>
+
+    <div style="width:60px; height:3px; background:var(--brand-accent); margin:18px auto 22px; border-radius:2px;"></div>
+
+    <h2 style="font-family:'Poppins',sans-serif; color:var(--brand-text-dark); font-size:22px; margin-bottom:10px;">
+        Ye page nahi mila
+    </h2>
+    <p style="font-size:14px; color:#9A8A7C; line-height:1.6; margin-bottom:28px;">
+        Jo page tum dhoond rahi ho, wo shayad hata diya gaya hai, naam badal gaya hai,
+        ya link hi galat hai. Chalo tumhe wapas sahi jagah pahunchate hain.
+    </p>
+
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <a href="{% url 'product_list' %}"
+           style="display:inline-flex; align-items:center; gap:8px; background:var(--brand-accent); color:#3C2B22; padding:13px 28px; border-radius:9px; font-weight:700; font-size:13.5px; text-decoration:none; box-shadow:0 8px 20px -6px rgba(201,151,63,0.6);">
+            <i class="ti ti-home"></i> Home pe jaao
+        </a>
+        <a href="{% url 'search_results' %}"
+           style="display:inline-flex; align-items:center; gap:8px; background:#fff; color:var(--brand-text-dark); border:1.5px solid var(--brand-border); padding:13px 28px; border-radius:9px; font-weight:700; font-size:13.5px; text-decoration:none;">
+            <i class="ti ti-search"></i> Product dhoondo
+        </a>
+    </div>
+
+</div>
+{% endblock %}

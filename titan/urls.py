@@ -17,11 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.contrib.auth import views as auth_views
+from django.utils.decorators import method_decorator
+from django_ratelimit.decorators import ratelimit
 
 
 admin.site.site_header = "Titanic Admin Panel"
 admin.site.site_title = "Titanic Admin"
 admin.site.index_title = "Products & Orders Management"
+
+# Password reset request pe rate limit — bahut zyada baar reset email na maangi ja sake
+rate_limited_password_reset = method_decorator(
+    ratelimit(key='ip', rate='5/m', method='POST', block=True), name='dispatch'
+)(auth_views.PasswordResetView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,7 +36,7 @@ urlpatterns = [
     path('', include('orders.urls')),
     path('', include('agents.urls')),
     path('', include('customers.urls')),
-    path('password-reset/', auth_views.PasswordResetView.as_view(
+    path('password-reset/', rate_limited_password_reset.as_view(
         template_name='registration/password_reset_form.html'
     ), name='password_reset'),
     path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(

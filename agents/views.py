@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from django.contrib import messages
+from django_ratelimit.core import is_ratelimited
 import random
 import string
 from .models import Agent, Commission
@@ -17,6 +18,12 @@ def generate_referral_code():
 
 def agent_signup(request):
     if request.method == 'POST':
+        was_limited = is_ratelimited(request, group='agent_signup', key='ip', rate='5/m', increment=True)
+        if was_limited:
+            messages.error(request, 'Bahut zyada attempts ho gaye hain. Thodi der baad try karo.')
+            form = AgentSignupForm(request.POST)
+            return render(request, 'agents/signup.html', {'form': form})
+
         form = AgentSignupForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
@@ -47,6 +54,11 @@ def agent_signup(request):
 
 def agent_login(request):
     if request.method == 'POST':
+        was_limited = is_ratelimited(request, group='agent_login', key='ip', rate='5/m', increment=True)
+        if was_limited:
+            messages.error(request, 'Bahut zyada login attempts ho gaye hain. 1 minute baad try karo.')
+            return render(request, 'agents/login.html')
+
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)

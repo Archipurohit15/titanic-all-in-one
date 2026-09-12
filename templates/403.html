@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="max-width:480px; margin:80px auto; padding:32px; background:#fff; border:1px solid var(--brand-border); border-radius:14px; text-align:center;">
+    <h2 style="font-family:'Poppins',sans-serif; color:var(--brand-text-dark); margin-bottom:12px;">Thoda ruk jao 🙏</h2>
+    <p style="font-size:14px; color:#9A8A7C; line-height:1.6;">
+        Aapne bahut zyada baar try kar liya hai thode se time mein.
+        Kripya 1 minute wait karke dobara try karo.
+    </p>
+    <a href="{% url 'product_list' %}" class="hero-cta" style="display:inline-block; margin-top:20px;">Home pe jaao</a>
+</div>
+{% endblock %}

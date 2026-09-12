@@ -3,12 +3,19 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django_ratelimit.core import is_ratelimited
 from .models import Customer
 from .forms import CustomerSignupForm
 
 
 def customer_signup(request):
     if request.method == 'POST':
+        was_limited = is_ratelimited(request, group='customer_signup', key='ip', rate='5/m', increment=True)
+        if was_limited:
+            messages.error(request, 'Bahut zyada attempts ho gaye hain. Thodi der baad try karo.')
+            form = CustomerSignupForm(request.POST)
+            return render(request, 'customers/signup.html', {'form': form})
+
         form = CustomerSignupForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
@@ -39,6 +46,12 @@ def customer_signup(request):
 
 def customer_login(request):
     if request.method == 'POST':
+        was_limited = is_ratelimited(request, group='customer_login', key='ip', rate='5/m', increment=True)
+        if was_limited:
+            messages.error(request, 'Bahut zyada login attempts ho gaye hain. 1 minute baad try karo.')
+            next_url = request.GET.get('next', '')
+            return render(request, 'customers/login.html', {'next': next_url})
+
         email = request.POST.get('email')
         password = request.POST.get('password')
         user = authenticate(request, username=email, password=password)

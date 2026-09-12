@@ -3,7 +3,9 @@ from django.http import JsonResponse
 from django.conf import settings
 from django.contrib import messages
 from datetime import timedelta
+from django_ratelimit.core import is_ratelimited
 import razorpay
+import re
 from products.models import Product
 from agents.models import Agent
 from .models import Order, OrderItem
@@ -112,11 +114,37 @@ def checkout(request):
     agents = Agent.objects.filter(is_approved=True)
 
     if request.method == 'POST':
-        full_name = request.POST.get('full_name')
-        phone = request.POST.get('phone')
-        address = request.POST.get('address')
-        pincode = request.POST.get('pincode')
+        was_limited = is_ratelimited(request, group='checkout', key='ip', rate='10/m', increment=True)
+        if was_limited:
+            messages.error(request, 'Bahut zyada attempts ho gaye hain. Thodi der baad try karo.')
+            return render(request, 'orders/checkout.html', {
+                'items': items, 'total': total, 'agents': agents, 'customer': customer,
+                'order_min_days': order_min_days, 'order_max_days': order_max_days,
+            })
+
+        full_name = request.POST.get('full_name', '').strip()
+        phone = request.POST.get('phone', '').strip()
+        address = request.POST.get('address', '').strip()
+        pincode = request.POST.get('pincode', '').strip()
         agent_id = request.POST.get('agent')
+
+        errors = []
+        if not full_name:
+            errors.append('Naam daalo.')
+        if not re.match(r'^[6-9]\d{9}$', phone):
+            errors.append('Valid 10-digit mobile number daalo (jaise 9876543210).')
+        if not address:
+            errors.append('Address daalo.')
+        if not re.match(r'^\d{6}$', pincode):
+            errors.append('Valid 6-digit pincode daalo.')
+
+        if errors:
+            for e in errors:
+                messages.error(request, e)
+            return render(request, 'orders/checkout.html', {
+                'items': items, 'total': total, 'agents': agents, 'customer': customer,
+                'order_min_days': order_min_days, 'order_max_days': order_max_days,
+            })
 
         agent = None
         if agent_id:

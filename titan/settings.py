@@ -25,12 +25,34 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!v1khllh@u0vuqpjdzac=izstoa+7rqiw5)lhjmgr7tska52q+'
+# .env / Render environment variable se aata hai — agar nahi milta (local dev mein bhool gaye)
+# to ek temporary key use ho jaayegi taaki app crash na ho, lekin production mein hamesha
+# SECRET_KEY environment variable set hona chahiye.
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-local-dev-only-change-in-production')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# .env mein DEBUG=True likhoge to local mein True hoga, Render pe (agar env var set nahi kiya)
+# ye automatically False ho jaayega — jo hi production ke liye sahi/safe hai.
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get(
+    'ALLOWED_HOSTS',
+    'titanic-all-in-one.onrender.com,127.0.0.1,localhost'
+).split(',')
+
+# Render HTTPS requests ko internally HTTP mein forward karta hai — Django ko batana
+# zaroori hai ki asli request HTTPS hi thi, warna cookies/CSRF sahi kaam nahi karenge.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+CSRF_TRUSTED_ORIGINS = os.environ.get(
+    'CSRF_TRUSTED_ORIGINS',
+    'https://titanic-all-in-one.onrender.com'
+).split(',')
+
+# Production mein (DEBUG=False) cookies sirf HTTPS ke through hi bhejo — safe rehta hai
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SECURE_SSL_REDIRECT = not DEBUG
 
 
 # Application definition

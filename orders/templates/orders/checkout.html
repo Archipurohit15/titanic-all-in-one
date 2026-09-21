@@ -53,6 +53,17 @@
       </button>
       <p id="location-status" style="font-size:11.5px; color:#B0553F; margin-bottom:14px;">⚠️ Delivery ke liye location detect karna zaroori hai</p>
 
+      <!-- <p id="location-help" style="display:none; color:#B0553F; font-size:12px; margin-bottom:14px;">
+    Location block hai. Address bar mein 🔒 icon pe click karo → Location ko Allow karo,
+    phir "Detect my location" dobara dabao.
+      </p> -->
+
+      <p id="location-help" style="display:none; color:#B0553F; font-size:14px; line-height:1.5;">
+    Location block ho gayi hai. Address bar mein <b>🔒 (ya ⓘ) icon</b> pe click karo →
+    <b>Location</b> ko <b>Allow</b> karo. Phir yahan "Detect my location" dobara dabao.
+    (Mobile pe: Chrome menu → Settings → Site settings → Location.)
+</p>
+
              <p style="font-size:11px; color:#9A8A7C; margin-bottom:14px;">
                   Note: Agar aapki delivery location store se 5 km se zyada door hai, 2% convenience charge lagega.
              </p>
@@ -113,7 +124,11 @@
 <script>
 function detectLocation() {
     const status = document.getElementById('location-status');
+    const help = document.getElementById('location-help');
     const submitBtn = document.getElementById('submit-order-btn');
+
+    help.style.display = 'none';
+    status.style.color = '';
     status.textContent = 'Location detect ho rahi hai...';
 
     navigator.geolocation.getCurrentPosition(
@@ -124,10 +139,15 @@ function detectLocation() {
             status.textContent = '✅ Location detect ho gayi';
             submitBtn.disabled = false;
         },
-        () => {
+        (err) => {
             status.style.color = '#B0553F';
-            status.textContent = '❌ Location permission nahi mili — bina isके order place nahi ho sakta';
             submitBtn.disabled = true;
+            if (err.code === 1) {
+                status.textContent = '❌ Location permission blocked hai';
+                help.style.display = 'block';
+            } else {
+                status.textContent = '❌ Location nahi mil paayi, dobara try karo';
+            }
         }
     );
 }

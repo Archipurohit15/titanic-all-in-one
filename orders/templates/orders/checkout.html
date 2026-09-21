@@ -65,7 +65,7 @@
 </p>
 
              <p style="font-size:11px; color:#9A8A7C; margin-bottom:14px;">
-                  Note: Agar aapki delivery location store se 5 km se zyada door hai, 2% convenience charge lagega.
+                  Note: Agar aapki delivery location store se 5 km se zyada door hai, 2% delivery charge lagega.
              </p>
  
 
@@ -96,9 +96,14 @@
 
             <div style="border-top:1px dashed #d8c9a3; margin:14px 0;"></div>
 
+            <div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:8px;">
+                <span>Delivery charge</span>
+                <span id="delivery-amount" style="color:#9A8A7C;">Location detect karo</span>
+            </div>
+
             <div style="display:flex; justify-content:space-between; font-size:17px; font-weight:700; margin-bottom:10px;">
                 <span>Total</span>
-                <span>₹{{ total }}</span>
+                <span id="grand-total" data-items-total="{{ total }}">₹{{ total }}</span>
             </div>
 
             {% if order_max_days %}
@@ -122,12 +127,56 @@
 
 
 <script>
+const STORE_LAT = parseFloat("{{ store_lat }}");
+const STORE_LNG = parseFloat("{{ store_lng }}");
+const FREE_DELIVERY_KM = 5;
+const CHARGE_RATE = 0.02;
+
+function distanceKm(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const rad = (d) => d * Math.PI / 180;
+    const dLat = rad(lat2 - lat1);
+    const dLon = rad(lon2 - lon1);
+    const a = Math.sin(dLat / 2) ** 2 +
+              Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLon / 2) ** 2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function updateDeliveryCharge(lat, lng) {
+    const amountEl = document.getElementById('delivery-amount');
+    const totalEl = document.getElementById('grand-total');
+    const itemsTotal = parseFloat(totalEl.dataset.itemsTotal);
+
+    if (lat === null) {
+        amountEl.style.color = '#9A8A7C';
+        amountEl.style.fontWeight = '';
+        amountEl.textContent = 'Location detect karo';
+        totalEl.textContent = '₹' + itemsTotal.toFixed(2);
+        return;
+    }
+
+    const km = distanceKm(STORE_LAT, STORE_LNG, lat, lng);
+
+    if (km > FREE_DELIVERY_KM) {
+        const charge = itemsTotal * CHARGE_RATE;
+        amountEl.style.color = '#B0553F';
+        amountEl.style.fontWeight = '600';
+        amountEl.textContent = '₹' + charge.toFixed(2);
+        totalEl.textContent = '₹' + (itemsTotal + charge).toFixed(2);
+    } else {
+        amountEl.style.color = 'var(--brand-instock)';
+        amountEl.style.fontWeight = '700';
+        amountEl.textContent = 'FREE';
+        totalEl.textContent = '₹' + itemsTotal.toFixed(2);
+    }
+}
+
 function detectLocation() {
     const status = document.getElementById('location-status');
     const help = document.getElementById('location-help');
     const submitBtn = document.getElementById('submit-order-btn');
 
-    help.style.display = 'none';
+    if (help) help.style.display = 'none';
     status.style.color = '';
     status.textContent = 'Location detect ho rahi hai...';
 
@@ -138,13 +187,15 @@ function detectLocation() {
             status.style.color = 'var(--brand-instock)';
             status.textContent = '✅ Location detect ho gayi';
             submitBtn.disabled = false;
+            updateDeliveryCharge(pos.coords.latitude, pos.coords.longitude);
         },
         (err) => {
             status.style.color = '#B0553F';
             submitBtn.disabled = true;
+            updateDeliveryCharge(null, null);
             if (err.code === 1) {
                 status.textContent = '❌ Location permission blocked hai';
-                help.style.display = 'block';
+                if (help) help.style.display = 'block';
             } else {
                 status.textContent = '❌ Location nahi mil paayi, dobara try karo';
             }

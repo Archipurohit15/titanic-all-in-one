@@ -140,6 +140,8 @@ def checkout(request):
                 messages.error(request, e)
             return render(request, 'orders/checkout.html', {
                 'items': items, 'total': total, 'agents': agents, 'customer': customer,
+                'store_lat': str(settings.STORE_LATITUDE),
+                'store_lng': str(settings.STORE_LONGITUDE),
                 'order_min_days': order_min_days, 'order_max_days': order_max_days,
             })
 
@@ -207,6 +209,8 @@ def checkout(request):
         'total': total,
         'agents': agents,
         'customer': customer,
+        'store_lat': str(settings.STORE_LATITUDE),
+        'store_lng': str(settings.STORE_LONGITUDE),
         'order_min_days': order_min_days,
         'order_max_days': order_max_days,
     })

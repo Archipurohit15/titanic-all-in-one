@@ -45,6 +45,19 @@
                 <input type="text" name="pincode" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px;">
             </div>
 
+            <input type="hidden" name="lat" id="id_lat">
+     <input type="hidden" name="lng" id="id_lng">
+
+    <button type="button" onclick="detectLocation()" style="margin-bottom:12px; padding:8px 14px; border-radius:8px; border:1px solid var(--brand-border); background:#fff; cursor:pointer; font-size:12.5px;">
+    📍 Detect my location
+      </button>
+      <p id="location-status" style="font-size:11.5px; color:#B0553F; margin-bottom:14px;">⚠️ Delivery ke liye location detect karna zaroori hai</p>
+
+             <p style="font-size:11px; color:#9A8A7C; margin-bottom:14px;">
+                  Note: Agar aapki delivery location store se 5 km se zyada door hai, 2% convenience charge lagega.
+             </p>
+ 
+
             <div style="margin-bottom:4px;">
                 <label style="display:block; font-size:13px; font-weight:600; margin-bottom:6px;">Referred by agent (optional)</label>
                 <select name="agent" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px;">
@@ -88,11 +101,36 @@
             </div>
             {% endif %}
 
-            <button type="submit" style="width:100%; background:#E8A33D; color:#1a1a1a; font-weight:700; padding:13px; border:none; border-radius:10px; cursor:pointer;">
+            <button type="submit" id="submit-order-btn" disabled style="width:100%; background:#E8A33D; color:#1a1a1a; font-weight:700; padding:13px; border:none; border-radius:10px; cursor:pointer;">
                 Place order
             </button>
         </div>
 
     </form>
 </div>
+
+
+<script>
+function detectLocation() {
+    const status = document.getElementById('location-status');
+    const submitBtn = document.getElementById('submit-order-btn');
+    status.textContent = 'Location detect ho rahi hai...';
+
+    navigator.geolocation.getCurrentPosition(
+        (pos) => {
+            document.getElementById('id_lat').value = pos.coords.latitude;
+            document.getElementById('id_lng').value = pos.coords.longitude;
+            status.style.color = 'var(--brand-instock)';
+            status.textContent = '✅ Location detect ho gayi';
+            submitBtn.disabled = false;
+        },
+        () => {
+            status.style.color = '#B0553F';
+            status.textContent = '❌ Location permission nahi mili — bina isके order place nahi ho sakta';
+            submitBtn.disabled = true;
+        }
+    );
+}
+</script>
+
 {% endblock %}

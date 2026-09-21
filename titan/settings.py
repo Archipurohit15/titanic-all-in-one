@@ -168,3 +168,6 @@ ANYMAIL = {
 DEFAULT_FROM_EMAIL = "Titanic <onboarding@resend.dev>"
 
 
+# store coordinates - change krne hai 
+STORE_LATITUDE = 26.920748568217682   # Jaisalmer store ka actual latitude — client se confirm kar lena
+STORE_LONGITUDE = 70.92324392428431  # actual longitude

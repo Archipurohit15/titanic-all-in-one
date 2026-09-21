@@ -7,6 +7,9 @@ import razorpay
 from products.models import Product
 from agents.models import Agent
 from .models import Order, OrderItem
+from .utils import calculate_distance_km
+from decimal import Decimal
+
 
 def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'
@@ -117,10 +120,39 @@ def checkout(request):
         address = request.POST.get('address')
         pincode = request.POST.get('pincode')
         agent_id = request.POST.get('agent')
+        lat = request.POST.get('lat')
+        lng = request.POST.get('lng')
+
+        errors = []
+        if not full_name:
+            errors.append('Naam daalo.')
+        if not phone:
+            errors.append('Phone number daalo.')
+        if not address:
+            errors.append('Address daalo.')
+        if not pincode:
+            errors.append('Pincode daalo.')
+        if not lat or not lng:
+            errors.append('Delivery location detect karo checkout complete karne ke liye.')
+
+        if errors:
+            for e in errors:
+                messages.error(request, e)
+            return render(request, 'orders/checkout.html', {
+                'items': items, 'total': total, 'agents': agents, 'customer': customer,
+                'order_min_days': order_min_days, 'order_max_days': order_max_days,
+            })
+
+        distance_km = calculate_distance_km(lat, lng)
 
         agent = None
         if agent_id:
             agent = get_object_or_404(Agent, id=agent_id)
+
+        convenience_charge = 0
+        if distance_km is not None and distance_km > 5:
+            convenience_charge = (total * Decimal('0.02')).quantize(Decimal('0.01'))
+
 
         order = Order.objects.create(
             customer=request.user,
@@ -129,6 +161,8 @@ def checkout(request):
             address=address,
             pincode=pincode,
             referred_by=agent,
+            delivery_distance_km=distance_km,
+            convenience_charge=convenience_charge,
         )
 
         for product_id, quantity in cart.items():
@@ -150,7 +184,7 @@ def checkout(request):
             return redirect('order_success', order_id=order.id)
 # ends here itna delete krdena baadme
  
-        amount_paise = int(order_total(order) * 100)
+        amount_paise = int(order.grand_total * 100)
         client = get_razorpay_client()
         razorpay_order = client.order.create({
             'amount': amount_paise,
@@ -235,6 +269,7 @@ def retry_payment(request, order_id):
 def order_success(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     total = sum(item.price_at_purchase * item.quantity for item in order.items.all())
+    grand_total = total + order.convenience_charge
 
     items = list(order.items.all())
     estimated_delivery_start = None
@@ -250,11 +285,14 @@ def order_success(request, order_id):
     return render(request, 'orders/order_success.html', {
         'order': order,
         'total': total,
+        'grand_total': grand_total,
         'order_min_days': order_min_days,
         'order_max_days': order_max_days,
         'estimated_delivery_start': estimated_delivery_start,
         'estimated_delivery_end': estimated_delivery_end,
     })
+
+
 
 def verify_delivery(request):
     error = None

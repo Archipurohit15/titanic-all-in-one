@@ -51,9 +51,20 @@
 </div>
             {% endfor %}
             <div class="total-row">
-                <span>Total Amount</span>
+                <span>Order Amount</span>
                 <span>₹{{ total }}</span>
             </div>
+
+            {% if order.convenience_charge > 0 %}
+            <div class="detail-row">
+                <span>Delivery Charge (5km+ dur delivery)</span>
+                <span>₹{{ order.convenience_charge }}</span>
+            </div>
+            <div class="total-row">
+                <span>Order Total</span>
+                <span>₹{{ order.grand_total }}</span>
+            </div>
+            {% endif %}
         </div>
 
 

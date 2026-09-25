@@ -165,7 +165,7 @@ ANYMAIL = {
     "RESEND_API_KEY": os.environ.get("RESEND_API_KEY"),
 }
 
-DEFAULT_FROM_EMAIL = "Titanic <onboarding@resend.dev>"
+DEFAULT_FROM_EMAIL = "Titanic <support@titanic-all-in-one.com>"
 
 
 # store coordinates - change krne hai 

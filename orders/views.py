@@ -23,7 +23,55 @@ def order_total(order):
     return sum(item.price_at_purchase * item.quantity for item in order.items.all())
 
 
+def get_valid_cart_items(request):
+    """
+    Session cart ko DB se resolve karta hai, aur agar koi product_id
+    ab database mein exist nahi karta (delete ho gaya / stale session),
+    use crash karne ke bajaye chupchaap cart se hata deta hai.
+    Returns: (items list, total)
+    """
+    cart = request.session.get('cart', {})
+    items = []
+    total = 0
+    stale_ids = []
+
+    if cart:
+        valid_int_ids = []
+        for pid in cart.keys():
+            try:
+                valid_int_ids.append(int(pid))
+            except (TypeError, ValueError):
+                stale_ids.append(pid)  # corrupted entry, drop it too
+
+        products = Product.objects.in_bulk(valid_int_ids)  # {id: Product}
+
+        for product_id, quantity in cart.items():
+            if product_id in stale_ids:
+                continue
+            product = products.get(int(product_id))
+            if product is None:
+                stale_ids.append(product_id)
+                continue
+            subtotal = product.price * quantity
+            total += subtotal
+            items.append({'product': product, 'quantity': quantity, 'subtotal': subtotal})
+
+    if stale_ids:
+        for sid in stale_ids:
+            cart.pop(sid, None)
+        request.session['cart'] = cart
+        request.session.modified = True
+
+    return items, total
+
+
 def add_to_cart(request, product_id):
+    if not Product.objects.filter(id=product_id).exists():
+        if is_ajax(request):
+            return JsonResponse({'error': 'Product not found'}, status=404)
+        messages.error(request, 'Ye product ab available nahi hai.')
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+
     cart = request.session.get('cart', {})
     pid = str(product_id)
     cart[pid] = cart.get(pid, 0) + 1
@@ -74,16 +122,8 @@ def clear_cart(request):
 
 
 def view_cart(request):
-    cart = request.session.get('cart', {})
-    items = []
-    total = 0
-    item_count = 0
-    for product_id, quantity in cart.items():
-        product = get_object_or_404(Product, id=product_id)
-        subtotal = product.price * quantity
-        total += subtotal
-        item_count += quantity
-        items.append({'product': product, 'quantity': quantity, 'subtotal': subtotal})
+    items, total = get_valid_cart_items(request)
+    item_count = sum(item['quantity'] for item in items)
     return render(request, 'orders/cart.html', {'items': items, 'total': total, 'item_count': item_count})
 
 
@@ -97,13 +137,10 @@ def checkout(request):
     if not cart:
         return redirect('view_cart')
 
-    items = []
-    total = 0
-    for product_id, quantity in cart.items():
-        product = get_object_or_404(Product, id=product_id)
-        subtotal = product.price * quantity
-        total += subtotal
-        items.append({'product': product, 'quantity': quantity, 'subtotal': subtotal})
+    items, total = get_valid_cart_items(request)
+    if not items:
+        messages.error(request, 'Aapka cart update ho gaya tha (kuch products ab available nahi hain). Dobara add karo.')
+        return redirect('view_cart')
 
     # Order ships together, so overall estimate = the item that takes the longest.
     if items:
@@ -167,13 +204,12 @@ def checkout(request):
             convenience_charge=convenience_charge,
         )
 
-        for product_id, quantity in cart.items():
-            product = get_object_or_404(Product, id=product_id)
+        for entry in items:
             OrderItem.objects.create(
                 order=order,
-                product=product,
-                quantity=quantity,
-                price_at_purchase=product.price,
+                product=entry['product'],
+                quantity=entry['quantity'],
+                price_at_purchase=entry['product'].price,
             )
 
         request.session['cart'] = {}

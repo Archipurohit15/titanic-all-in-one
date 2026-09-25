@@ -18,10 +18,13 @@ from django.contrib import admin
 from django.urls import path,include
 from django.contrib.auth import views as auth_views
 from django.contrib.sitemaps.views import sitemap
-from products.sitemaps import ProductSitemap
+from products.sitemaps import ProductSitemap, CategorySitemap, StaticViewSitemap
+
 
 sitemaps = {
     'products': ProductSitemap,
+    'categories': CategorySitemap,
+    'static': StaticViewSitemap,
 }
 
 

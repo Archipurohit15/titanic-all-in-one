@@ -17,6 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from django.contrib.auth import views as auth_views
+from django.contrib.sitemaps.views import sitemap
+from products.sitemaps import ProductSitemap
+
+sitemaps = {
+    'products': ProductSitemap,
+}
 
 
 admin.site.site_header = "Titanic Admin Panel"
@@ -29,6 +35,7 @@ urlpatterns = [
     path('', include('orders.urls')),
     path('', include('agents.urls')),
     path('', include('customers.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('password-reset/', auth_views.PasswordResetView.as_view(
         template_name='registration/password_reset_form.html',
         email_template_name='registration/password_reset_email.txt',

@@ -5,7 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Customer
 from .forms import CustomerSignupForm
-
+from django.utils.http import url_has_allowed_host_and_scheme
+from django.conf import settings
+from django_ratelimit.decorators import ratelimit
 
 def customer_signup(request):
     if request.method == 'POST':
@@ -37,17 +39,21 @@ def customer_signup(request):
     return render(request, 'customers/signup.html', {'form': form})
 
 
+@ratelimit(key='post:email', rate='5/m', block=True)
 def customer_login(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
         user = authenticate(request, username=email, password=password)
 
-        # sirf customer hi is login se andar aa sakte hain, agent nahi
         if user is not None and hasattr(user, 'customer'):
             login(request, user)
-            next_url = request.POST.get('next') or 'customer_dashboard'
-            return redirect(next_url)
+            next_url = request.POST.get('next')
+            if next_url and url_has_allowed_host_and_scheme(
+                next_url, allowed_hosts={request.get_host()}, require_https=not settings.DEBUG
+            ):
+                return redirect(next_url)
+            return redirect('customer_dashboard')
         else:
             messages.error(request, 'Galat email ya password.')
 

@@ -9,7 +9,7 @@ import string
 from .models import Agent, Commission
 from .forms import AgentSignupForm
 from orders.models import Order
-
+from django_ratelimit.decorators import ratelimit
 
 def generate_referral_code():
     return 'AG' + ''.join(random.choices(string.digits, k=6))
@@ -44,7 +44,7 @@ def agent_signup(request):
 
     return render(request, 'agents/signup.html', {'form': form})
 
-
+@ratelimit(key='post:username', rate='5/m', block=True)
 def agent_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')

@@ -25,13 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!v1khllh@u0vuqpjdzac=izstoa+7rqiw5)lhjmgr7tska52q+'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = [h.strip() for h in os.getenv('ALLOWED_HOSTS', '').split(',') if h.strip()]
 
 SITE_ID = 1
 
@@ -47,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django_ratelimit',
 
     'django.contrib.sites',
     'django.contrib.sitemaps',
@@ -177,3 +177,23 @@ DEFAULT_FROM_EMAIL = "Titanic <support@titanic-all-in-one.com>"
 # store coordinates - change krne hai 
 STORE_LATITUDE = 26.920748568217682   # Jaisalmer store ka actual latitude — client se confirm kar lena
 STORE_LONGITUDE = 70.92324392428431  # actual longitude
+
+
+STAFF_DELIVERY_PIN = os.getenv('STAFF_DELIVERY_PIN')
+
+
+
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    X_CONTENT_TYPE_OPTIONS = 'nosniff'
+    SECURE_BROWSER_XSS_FILTER = True
+
+
+SILENCED_SYSTEM_CHECKS = ['django_ratelimit.E003', 'django_ratelimit.W001']
+
+

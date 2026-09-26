@@ -9,6 +9,9 @@ from agents.models import Agent
 from .models import Order, OrderItem
 from .utils import calculate_distance_km
 from decimal import Decimal
+from django.contrib.auth.decorators import login_required
+from django_ratelimit.decorators import ratelimit
+
 
 
 def is_ajax(request):
@@ -261,7 +264,7 @@ def payment_verify(request):
     razorpay_order_id = request.POST.get('razorpay_order_id')
     razorpay_signature = request.POST.get('razorpay_signature')
 
-    order = get_object_or_404(Order, id=order_id)
+    order = get_object_or_404(Order, id=order_id, customer=request.user)
     client = get_razorpay_client()
 
     try:
@@ -279,15 +282,17 @@ def payment_verify(request):
     return redirect('order_success', order_id=order.id)
 
 
+@login_required(login_url='customer_login')
 def payment_failed(request, order_id):
-    order = get_object_or_404(Order, id=order_id)
+    order = get_object_or_404(Order, id=order_id, customer=request.user)
     return render(request, 'orders/payment_failed.html', {'order': order})
 
 
+@login_required(login_url='customer_login')
 def retry_payment(request, order_id):
-    order = get_object_or_404(Order, id=order_id, status='pending')
+    order = get_object_or_404(Order, id=order_id, customer=request.user, status='pending')
 
-    amount_paise = int(order_total(order) * 100)
+    amount_paise = int(order.grand_total * 100)
     client = get_razorpay_client()
     razorpay_order = client.order.create({
         'amount': amount_paise,
@@ -306,8 +311,10 @@ def retry_payment(request, order_id):
     })
 
 
+
+@login_required(login_url='customer_login')
 def order_success(request, order_id):
-    order = get_object_or_404(Order, id=order_id)
+    order = get_object_or_404(Order, id=order_id, customer=request.user)
     total = sum(item.price_at_purchase * item.quantity for item in order.items.all())
     grand_total = total + order.convenience_charge
 
@@ -334,6 +341,7 @@ def order_success(request, order_id):
 
 
 
+@ratelimit(key='ip', rate='5/10m', block=True)
 def verify_delivery(request):
     error = None
     success = None
@@ -341,20 +349,24 @@ def verify_delivery(request):
     if request.method == 'POST':
         order_id = request.POST.get('order_id')
         otp = request.POST.get('otp')
+        staff_pin = request.POST.get('staff_pin')
 
-        order = Order.objects.filter(id=order_id).first()
-
-        if not order:
-            error = 'Ye Order ID exist nahi karta.'
-        elif order.status == 'delivered':
-            error = 'Ye order pehle se delivered mark ho chuka hai.'
-        elif order.status != 'shipped':
-            error = 'Ye order abhi shipped nahi hua hai, OTP verify nahi ho sakta.'
-        elif order.delivery_otp != otp:
-            error = 'Galat OTP. Dobara try karo.'
+        if staff_pin != settings.STAFF_DELIVERY_PIN:
+            error = 'Galat staff PIN.'
         else:
-            order.status = 'delivered'
-            order.save()
-            success = f'Order #{order.id} successfully delivered mark ho gaya!'
+            order = Order.objects.filter(id=order_id).first()
+
+            if not order:
+                error = 'Ye Order ID exist nahi karta.'
+            elif order.status == 'delivered':
+                error = 'Ye order pehle se delivered mark ho chuka hai.'
+            elif order.status != 'shipped':
+                error = 'Ye order abhi shipped nahi hua hai, OTP verify nahi ho sakta.'
+            elif order.delivery_otp != otp:
+                error = 'Galat OTP. Dobara try karo.'
+            else:
+                order.status = 'delivered'
+                order.save()
+                success = f'Order #{order.id} successfully delivered mark ho gaya!'
 
     return render(request, 'orders/verify_delivery.html', {'error': error, 'success': success})

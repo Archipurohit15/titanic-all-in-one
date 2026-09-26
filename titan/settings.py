@@ -178,11 +178,11 @@ DEFAULT_FROM_EMAIL = "Titanic <support@titanic-all-in-one.com>"
 STORE_LATITUDE = 26.920748568217682   # Jaisalmer store ka actual latitude — client se confirm kar lena
 STORE_LONGITUDE = 70.92324392428431  # actual longitude
 
-
+# staff ke delivery verification ke liye 
 STAFF_DELIVERY_PIN = os.getenv('STAFF_DELIVERY_PIN')
 
 
-
+# production hard security enhance krne ke liye 
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
@@ -194,6 +194,24 @@ if not DEBUG:
     SECURE_BROWSER_XSS_FILTER = True
 
 
+# ratelimit error ko silent krne ke liye bas ek baar - baadme hata skte ho
 SILENCED_SYSTEM_CHECKS = ['django_ratelimit.E003', 'django_ratelimit.W001']
 
-
+# caching 
+if DEBUG:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        }
+    }
+    SILENCED_SYSTEM_CHECKS = ['django_ratelimit.E003', 'django_ratelimit.W001']
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': os.getenv('REDIS_URL'),
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            }
+        }
+    }

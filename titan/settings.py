@@ -184,6 +184,7 @@ STAFF_DELIVERY_PIN = os.getenv('STAFF_DELIVERY_PIN')
 
 # production hard security enhance krne ke liye 
 if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
@@ -192,6 +193,7 @@ if not DEBUG:
     SECURE_HSTS_PRELOAD = True
     X_CONTENT_TYPE_OPTIONS = 'nosniff'
     SECURE_BROWSER_XSS_FILTER = True
+
 
 
 # ratelimit error ko silent krne ke liye bas ek baar - baadme hata skte ho

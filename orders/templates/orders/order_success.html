@@ -20,10 +20,30 @@
         <span class="c c10">✧</span>
     </div>
         <div class="success-icon">✓</div>
+        {% if order.status == 'pending' %}
+        <h2>Order Placed!</h2>
+        <p>We'll confirm your order as soon as we verify your payment.</p>
+        {% else %}
         <h2>Order Successful!</h2>
         <p>Thank you for shopping with Titanic.</p>
+        {% endif %}
         <div class="order-id-badge">Order ID: #TIT{{ order.id }}</div>
     </div>
+
+    {% if order.status == 'pending' %}
+    <div class="delivery-est-box">
+        <h3>💳 Payment pending</h3>
+        <p class="delivery-est-note">
+            {% if order.utr_number %}
+                We've noted your UTR <b>{{ order.utr_number }}</b>. Send your payment screenshot on WhatsApp so we can confirm faster.
+            {% else %}
+                Pay ₹{{ order.grand_total }} by UPI and send the screenshot on WhatsApp so we can confirm your order.
+            {% endif %}
+        </p>
+        <a href="{{ whatsapp_link }}" target="_blank" rel="noopener" class="continue-btn">Send proof on WhatsApp</a>
+        <a href="{% url 'upi_payment' order.id %}" class="continue-btn">View payment QR</a>
+    </div>
+    {% endif %}
 
     <div class="cards-row">
 
@@ -80,7 +100,7 @@
             </div>
             <div class="detail-row">
                 <span>Status</span>
-                <span class="status-pending">{{ order.status|capfirst }}</span>
+                <span class="status-pending">{{ order.get_status_display }}</span>
             </div>
             {% if estimated_delivery_start %}
             <div class="detail-row">

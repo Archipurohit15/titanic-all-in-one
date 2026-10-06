@@ -1,29 +1,47 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from django.conf import settings
 from django.contrib import messages
 from datetime import timedelta
-import razorpay
+from decimal import Decimal
+import re
+from urllib.parse import quote, urlencode
+import segno
+from django.contrib.auth.decorators import login_required
+from django_ratelimit.decorators import ratelimit
 from products.models import Product
 from agents.models import Agent
 from .models import Order, OrderItem
 from .utils import calculate_distance_km
-from decimal import Decimal
-from django.contrib.auth.decorators import login_required
-from django_ratelimit.decorators import ratelimit
-
 
 
 def is_ajax(request):
     return request.headers.get('x-requested-with') == 'XMLHttpRequest'
 
 
-def get_razorpay_client():
-    return razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
-
-
 def order_total(order):
     return sum(item.price_at_purchase * item.quantity for item in order.items.all())
+
+
+def build_upi_link(order):
+    params = {
+        'pa': settings.UPI_ID,
+        'pn': settings.UPI_PAYEE_NAME,
+        'am': f"{order.grand_total:.2f}",
+        'cu': 'INR',
+        'tn': f"Order TIT{order.id}",
+    }
+    return 'upi://pay?' + urlencode(params, quote_via=quote)
+
+
+def build_whatsapp_link(order, utr=''):
+    text = (
+        f"Hi, I have paid for Order #TIT{order.id}.\n"
+        f"Amount: Rs {order.grand_total:.2f}\n"
+        f"Name: {order.full_name}\n"
+        f"UTR: {utr or '(screenshot attached)'}"
+    )
+    return f"https://wa.me/{settings.WHATSAPP_NUMBER}?text={quote(text)}"
 
 
 def get_valid_cart_items(request):
@@ -44,9 +62,9 @@ def get_valid_cart_items(request):
             try:
                 valid_int_ids.append(int(pid))
             except (TypeError, ValueError):
-                stale_ids.append(pid)  # corrupted entry, drop it too
+                stale_ids.append(pid)
 
-        products = Product.objects.in_bulk(valid_int_ids)  # {id: Product}
+        products = Product.objects.in_bulk(valid_int_ids)
 
         for product_id, quantity in cart.items():
             if product_id in stale_ids:
@@ -134,7 +152,7 @@ def checkout(request):
     if not hasattr(request.user, 'customer'):
         messages.error(request, 'Page is only for customers. Login / signup to view')
         return redirect('customer_login')
-    customer=request.user.customer
+    customer = request.user.customer
 
     cart = request.session.get('cart', {})
     if not cart:
@@ -145,7 +163,6 @@ def checkout(request):
         messages.error(request, 'Aapka cart update ho gaya tha (kuch products ab available nahi hain). Dobara add karo.')
         return redirect('view_cart')
 
-    # Order ships together, so overall estimate = the item that takes the longest.
     if items:
         order_min_days = max(item['product'].min_delivery_days for item in items)
         order_max_days = max(item['product'].max_delivery_days for item in items)
@@ -195,7 +212,6 @@ def checkout(request):
         if distance_km is not None and distance_km > 5:
             convenience_charge = (total * Decimal('0.02')).quantize(Decimal('0.01'))
 
-
         order = Order.objects.create(
             customer=request.user,
             full_name=full_name,
@@ -217,31 +233,7 @@ def checkout(request):
 
         request.session['cart'] = {}
 
-        # TEMPORARY: real Razorpay keys nahi hain abhi, testing ke liye seedha "paid" mark kar do.
-        # Jab real keys mil jaayein, .env mein RAZORPAY_BYPASS=False kar dena — ye poora block skip ho jaayega.
-        if settings.RAZORPAY_BYPASS:
-            order.status = 'paid'
-            order.save()
-            return redirect('order_success', order_id=order.id)
-# ends here itna delete krdena baadme
- 
-        amount_paise = int(order.grand_total * 100)
-        client = get_razorpay_client()
-        razorpay_order = client.order.create({
-            'amount': amount_paise,
-            'currency': 'INR',
-            'payment_capture': 1,
-        })
-
-        order.razorpay_order_id = razorpay_order['id']
-        order.save()
-
-        return render(request, 'orders/payment.html', {
-            'order': order,
-            'amount_paise': amount_paise,
-            'razorpay_order_id': razorpay_order['id'],
-            'razorpay_key_id': settings.RAZORPAY_KEY_ID,
-        })
+        return redirect('upi_payment', order_id=order.id)
 
     return render(request, 'orders/checkout.html', {
         'items': items,
@@ -255,61 +247,35 @@ def checkout(request):
     })
 
 
-def payment_verify(request):
-    if request.method != 'POST':
-        return redirect('view_cart')
-
-    order_id = request.POST.get('order_id')
-    razorpay_payment_id = request.POST.get('razorpay_payment_id')
-    razorpay_order_id = request.POST.get('razorpay_order_id')
-    razorpay_signature = request.POST.get('razorpay_signature')
-
-    order = get_object_or_404(Order, id=order_id, customer=request.user)
-    client = get_razorpay_client()
-
-    try:
-        client.utility.verify_payment_signature({
-            'razorpay_order_id': razorpay_order_id,
-            'razorpay_payment_id': razorpay_payment_id,
-            'razorpay_signature': razorpay_signature,
-        })
-    except razorpay.errors.SignatureVerificationError:
-        return redirect('payment_failed', order_id=order.id)
-
-    order.status = 'paid'
-    order.save()
-
-    return redirect('order_success', order_id=order.id)
-
-
 @login_required(login_url='customer_login')
-def payment_failed(request, order_id):
+def upi_payment(request, order_id):
     order = get_object_or_404(Order, id=order_id, customer=request.user)
-    return render(request, 'orders/payment_failed.html', {'order': order})
 
+    if order.status != 'pending':
+        return redirect('order_success', order_id=order.id)
 
-@login_required(login_url='customer_login')
-def retry_payment(request, order_id):
-    order = get_object_or_404(Order, id=order_id, customer=request.user, status='pending')
+    error = None
+    if request.method == 'POST':
+        utr = request.POST.get('utr_number', '').strip()
+        if not re.fullmatch(r'\d{12}', utr):
+            error = 'UTR / Transaction ID 12 digits ka hota hai. Apne UPI app mein check karke dobara daalo.'
+        else:
+            order.utr_number = utr
+            order.save(update_fields=['utr_number'])
+            return redirect('order_success', order_id=order.id)
 
-    amount_paise = int(order.grand_total * 100)
-    client = get_razorpay_client()
-    razorpay_order = client.order.create({
-        'amount': amount_paise,
-        'currency': 'INR',
-        'payment_capture': 1,
-    })
+    upi_link = build_upi_link(order)
+    qr_svg = segno.make(upi_link, error='m').svg_data_uri(scale=6, border=2)
 
-    order.razorpay_order_id = razorpay_order['id']
-    order.save()
-
-    return render(request, 'orders/payment.html', {
+    return render(request, 'orders/upi_payment.html', {
         'order': order,
-        'amount_paise': amount_paise,
-        'razorpay_order_id': razorpay_order['id'],
-        'razorpay_key_id': settings.RAZORPAY_KEY_ID,
+        'amount': order.grand_total,
+        'upi_id': settings.UPI_ID,
+        'upi_link': upi_link,
+        'qr_svg': qr_svg,
+        'whatsapp_link': build_whatsapp_link(order, order.utr_number),
+        'error': error,
     })
-
 
 
 @login_required(login_url='customer_login')
@@ -337,8 +303,8 @@ def order_success(request, order_id):
         'order_max_days': order_max_days,
         'estimated_delivery_start': estimated_delivery_start,
         'estimated_delivery_end': estimated_delivery_end,
+        'whatsapp_link': build_whatsapp_link(order, order.utr_number),
     })
-
 
 
 @ratelimit(key='ip', rate='5/10m', block=True)

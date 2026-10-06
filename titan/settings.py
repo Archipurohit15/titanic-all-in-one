@@ -142,9 +142,10 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-RAZORPAY_KEY_ID = os.getenv('RAZORPAY_KEY_ID')
-RAZORPAY_KEY_SECRET = os.getenv('RAZORPAY_KEY_SECRET')
-RAZORPAY_BYPASS = os.getenv('RAZORPAY_BYPASS', 'False') == 'True'
+# Manual UPI payments (QR + WhatsApp confirmation) - set these in .env / Render env vars
+UPI_ID = os.getenv('UPI_ID', '')                        # e.g. shopname@okhdfcbank
+UPI_PAYEE_NAME = os.getenv('UPI_PAYEE_NAME', 'Titanic')
+WHATSAPP_NUMBER = os.getenv('WHATSAPP_NUMBER', '')      # country code + number, no + or spaces: 919876543210
 
 
 # Cloudinary - stores manually uploaded product/category images permanently

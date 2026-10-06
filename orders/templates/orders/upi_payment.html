@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'orders/payment.css' %}">
+
+<div class="payment-wrap">
+    <div class="payment-card">
+        <i class="ti ti-qrcode payment-icon"></i>
+        <h2>Pay via UPI</h2>
+        <p>Order #TIT{{ order.id }} — <b>₹{{ amount }}</b></p>
+
+        <img src="{{ qr_svg }}" alt="UPI QR code for order TIT{{ order.id }}" style="width:220px; max-width:100%; margin:14px auto; display:block;">
+
+        <p class="hint">
+            Scan with any UPI app (GPay, PhonePe, Paytm...). The amount is already filled in.<br>
+            UPI ID: <b>{{ upi_id }}</b>
+        </p>
+
+        <a href="{{ upi_link }}" class="pay-btn">Pay with UPI app (mobile)</a>
+
+        <hr style="border:none; border-top:1px solid var(--brand-border); margin:26px 0 18px;">
+
+        <p><b>After paying</b></p>
+        <p class="hint">Enter the 12-digit UTR / Transaction ID from your UPI app, then send the payment screenshot to us on WhatsApp.</p>
+
+        {% if error %}
+        <p style="color:#B0553F; font-size:13px;">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="utr_number" value="{{ order.utr_number }}" inputmode="numeric" maxlength="12" pattern="[0-9]{12}" placeholder="12-digit UTR number" required
+                   style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; text-align:center; margin-bottom:6px;">
+            <button type="submit" class="pay-btn">I have paid</button>
+        </form>
+
+        <p style="margin-top:18px;">
+            <a href="{{ whatsapp_link }}" target="_blank" rel="noopener" class="pay-btn" style="background:#25D366;">Send screenshot on WhatsApp</a>
+        </p>
+        <p class="hint" style="margin-top:14px;">Your order is confirmed once we verify the payment.</p>
+    </div>
+</div>
+{% endblock %}

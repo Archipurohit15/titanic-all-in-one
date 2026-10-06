@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class Order(models.Model):
     STATUS_CHOICES = [
-        ('pending', 'Pending'),
+        ('pending', 'Awaiting payment'),
         ('paid', 'Paid'),
         ('shipped', 'Shipped'),
         ('delivered', 'Delivered'),
@@ -19,7 +19,8 @@ class Order(models.Model):
     referred_by = models.ForeignKey(Agent, null=True, blank=True, on_delete=models.SET_NULL)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     delivery_otp = models.CharField(max_length=6, null=True, blank=True)
-    razorpay_order_id = models.CharField(max_length=100, null=True, blank=True)
+    razorpay_order_id = models.CharField(max_length=100, null=True, blank=True)  # legacy, unused now
+    utr_number = models.CharField(max_length=30, blank=True, default='')  # UPI transaction ref entered by customer
     created_at = models.DateTimeField(auto_now_add=True)
     delivery_distance_km = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     convenience_charge = models.DecimalField(max_digits=10, decimal_places=2, default=0)

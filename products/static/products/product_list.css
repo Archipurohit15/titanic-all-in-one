@@ -27,7 +27,7 @@ html {
 }
 
 .hero-photo {
-    background-image: url('../products/hero-bg.png');
+    background-image: url('../products/hero.png');
     background-size: cover;
     background-position: center 30%;
     position: relative;

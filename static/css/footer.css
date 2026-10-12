@@ -11,7 +11,7 @@
     margin: 0 auto;
     padding: 48px 32px 32px;
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+    grid-template-columns: 1.2fr 1.2fr 1.2fr ;
     gap: 32px;
 }
 
@@ -141,6 +141,40 @@
 .footer-bottom-links a:hover {
     color: var(--brand-accent-light);
 }
+
+
+.footer-stores {
+    margin-bottom: 22px;
+}
+
+.footer-stores .footer-contact {
+    gap: 14px;
+}
+
+.store-name {
+    display: block;
+    color: #FFFFFF;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.store-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+}
+
+.store-links a {
+    color: #C9BAA9;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.store-links a:hover {
+    color: var(--brand-accent-light);
+}
+
+
 
 /* ---------- Responsive ---------- */
 

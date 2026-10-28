@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Terms &amp; Conditions — Titanic{% endblock %}
+
+{% block content %}
+<style>
+    .legal-wrap {
+        max-width: 820px;
+        margin: 40px auto 80px;
+        padding: 0 24px;
+    }
+
+    .legal-head {
+        margin-bottom: 24px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid var(--brand-border);
+    }
+
+    .legal-head h1 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 30px;
+        font-weight: 700;
+        color: var(--brand-text-dark);
+        margin: 0 0 8px;
+    }
+
+    .legal-updated {
+        font-size: 13px;
+        color: #a69a8c;
+        margin: 0;
+    }
+
+    .legal-intro {
+        font-size: 14.5px;
+        line-height: 1.75;
+        color: #5a4b3e;
+        margin: 0 0 14px;
+    }
+
+    .legal-section {
+        margin-bottom: 28px;
+    }
+
+    .legal-section h2 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--brand-primary);
+        margin: 0 0 10px;
+    }
+
+    .legal-section h3 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--brand-text-dark);
+        margin: 16px 0 8px;
+    }
+
+    .legal-section p,
+    .legal-section li {
+        font-size: 14.5px;
+        line-height: 1.75;
+        color: #5a4b3e;
+    }
+
+    .legal-section p {
+        margin: 0 0 10px;
+    }
+
+    .legal-section ul {
+        margin: 0 0 10px;
+        padding-left: 22px;
+    }
+
+    .legal-section li {
+        margin-bottom: 6px;
+    }
+
+    .legal-section a,
+    .legal-end a {
+        color: var(--brand-primary);
+        text-decoration: underline;
+    }
+
+    .legal-end {
+        margin-top: 8px;
+        padding-top: 18px;
+        border-top: 1px solid var(--brand-border);
+        font-size: 14.5px;
+        line-height: 1.75;
+        color: #5a4b3e;
+    }
+
+    @media (max-width: 480px) {
+        .legal-head h1 { font-size: 24px; }
+    }
+</style>
+
+<div class="legal-wrap">
+
+    <div class="legal-head">
+        <h1>Terms &amp; Conditions</h1>
+        <p class="legal-updated">Last updated: 28 October 2026</p>
+    </div>
+
+    <p class="legal-intro">Welcome to Titanic! By using our website or placing an order, you agree to the following Terms &amp; Conditions. Please read them before making a purchase.</p>
+    <div class="legal-section">
+        <h2>1. About Titanic</h2>
+        <p>Titanic is a locally operated retail business based in Jaisalmer, Rajasthan, dealing in electronics, electrical goods and industrial products.</p>
+        <ul>
+            <li><strong>Business owner:</strong> Manish Jhawar </li>
+            <li><strong>Store address:</strong> Defence Electronic - Above Titanic Electrical , near bandhan bank street , mahrana pratap marg , Gandhi colony, Jaisalmer, Rajasthan</li>
+            <li><strong>Email:</strong> <a href="mailto:titanicallinone@gmail.com">titanicallinone@gmail.com</a></li>
+            <li><strong>Phone:</strong> <span class="confirm">9509905111</span></li>
+        </ul>
+    </div>
+
+    <div class="legal-section">
+        <h2>2. Products and Prices</h2>
+        <p>We try our best to provide accurate product descriptions, photographs, specifications and prices. Actual packaging or appearance may differ slightly.</p>
+        <p>All prices are in Indian Rupees (INR). Product availability depends on stock. If a product becomes unavailable after you place an order, we will inform you and arrange an appropriate refund if we cannot fulfil your order.</p>
+        <p>Any applicable delivery charges or additional fees will be shown before you confirm your order.</p>
+    </div>
+
+    <div class="legal-section">
+        <h2>3. Orders and Payments</h2>
+        <p>Orders are subject to product availability and payment verification. If we cannot fulfil an order, we will inform you and refund any amount due.</p>
+        <p>Available payment methods will be displayed at checkout. Please never share your UPI PIN, payment OTP, card PIN or password with anyone claiming to represent Titanic.</p>
+    </div>
+
+    <div class="legal-section">
+        <h2>4. Delivery</h2>
+        <p>We currently provide delivery to eligible locations in and around Jaisalmer, Rajasthan.</p>
+        <p>Delivery dates are estimates and may vary depending on stock availability and local conditions. Customers must provide a correct delivery address and a reachable phone number.</p>
+        <p>A delivery convenience charge may apply to addresses beyond our specified delivery distance. Any applicable charge will be displayed at checkout before payment.</p>
+        <p>Where a delivery OTP is used, share it with the delivery person only after receiving your parcel.</p>
+    </div>
+
+    <div class="legal-section">
+        <h2>5. Returns and Refunds</h2>
+        <p><strong>Change-of-mind returns:</strong> We do not ordinarily accept returns solely because a customer has changed their mind or no longer wants a product.</p>
+        <p><strong>Defective or incorrect products:</strong> This policy does not take away any rights or remedies available under applicable law. If you receive a defective, damaged, incorrect or materially misdescribed product, please contact us so we can assess the issue and provide the remedy required by law.</p>
+        <p><strong>Unavailable or discontinued products:</strong> If a product is discontinued or unavailable and we cannot fulfil your order, we will inform you and refund the amount paid for the unfulfilled product.</p>
+        <p>For assistance, contact us at <a href="mailto:titanicallinone@gmail.com">titanicallinone@gmail.com</a> or <span class="confirm">9509905111</span>.</p>
+    </div>
+
+    <div class="legal-section">
+        <h2>6. Warranty and Guarantee</h2>
+        <p>Product warranties and guarantees are provided according to the respective manufacturer’s or brand’s policies.</p>
+        <p>Our store can help customers with warranty information and the applicable claim process. Please retain your purchase invoice and warranty documents.</p>
+        <p>Nothing in this section removes any rights you may have under applicable law.</p>
+    </div>
+
+     <div class="legal-section">
+        <h2> 7. Information and help.</h2>
+        <p> Information and any help related to any product and model is available at the franchise store. </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>8. Bajaj Finance</h2>
+        <p>Bajaj Finance may be available for eligible purchases, subject to the finance provider’s approval, eligibility criteria and applicable terms.</p>
+        <p>Interest, fees, repayment schedules and other finance conditions are determined by the relevant finance provider.</p>
+    </div>
+
+    <div class="legal-section">
+        <h2>9. Agent Referral Programme</h2>
+        <p>Customers may choose an approved Titanic agent when placing an eligible order. Selecting an agent does not itself increase the customer’s product price.</p>
+        <p>Approved agents may earn commissions on eligible referred orders at the rates assigned to the relevant products.</p>
+        <p>Agents must not create fake orders, mislead customers, misuse referral codes or engage in fraudulent activity. Commission eligibility, cancellations, refunds and payouts are governed by the applicable programme rules.</p>
+        <p>Titanic may suspend or remove agents for fraud or misuse, subject to applicable law and the programme rules.</p>
+    </div>
+
+    <div class="legal-section">
+        <h2>10. Customer Information</h2>
+        <p>We collect information such as your name, phone number, email address, delivery address and, where needed, location information to process orders and arrange delivery.</p>
+        <p>We handle personal information in accordance with our Privacy Policy and applicable data protection law. Please read our separate Privacy Policy to understand how your information is used and protected.</p>
+    </div>
+
+    <div class="legal-section">
+        <h2>11. Website Use</h2>
+        <p>Customers must use the website lawfully and must not place fraudulent orders, attempt unauthorised access or interfere with the website’s operation.</p>
+        <p>The Titanic name, logo and original website content may not be copied or reused without permission, except where permitted by law.</p>
+    </div>
+
+    <div class="legal-section">
+        <h2>12. Liability</h2>
+        <p>We make reasonable efforts to keep our website and product information accurate and available. Temporary interruptions or errors may occasionally occur.</p>
+        <p>Nothing in these Terms &amp; Conditions excludes any consumer right, refund, remedy or liability that cannot legally be excluded under applicable Indian law.</p>
+    </div>
+
+    <div class="legal-section">
+        <h2>13. Governing Law</h2>
+        <p>These Terms &amp; Conditions are governed by the laws of India. Nothing in these terms restricts a customer’s right to approach a consumer commission or other competent authority where permitted by law.</p>
+    </div>
+
+    <div class="legal-section">
+        <h2>14. Changes to These Terms</h2>
+        <p>We may update these Terms &amp; Conditions when necessary. The latest revision date will be displayed at the top of this page. Any changes will be subject to applicable law and will not remove rights that have already accrued.</p>
+    </div>
+
+    <div class="legal-section">
+        <h2>15. Contact and Complaints</h2>
+        <p>For questions about orders, payments, delivery, products or refunds, contact:</p>
+        <ul>
+            <li><strong>Business:</strong> Titanic-All-in-one</li>
+            <li><strong>Email:</strong> <a href="mailto:titanicallinone@gmail.com">titanicallinone@gmail.com</a></li>
+            <li><strong>Phone:</strong> 9509905111</li>
+            <li><strong>Address:</strong>Defence Electronic - Above Titanic Electrical , near bandhan bank street , mahrana pratap marg , Gandhi colony, Jaisalmer, Rajasthan</li>
+            <li><strong>Grievance Officer:</strong> Manish Jhawar, Owner</li>
+            <li><strong>Grievance email:</strong> totanicallinone@gmail.com</li>
+            <li><strong>Grievance phone:</strong> 9509905111</li>
+        </ul>
+        <p>We will acknowledge and resolve complaints within the time limits prescribed by applicable law.</p>
+        <p>Thank you for choosing Titanic!</p>
+    </div>
+
+
+</div>
+{% endblock %}

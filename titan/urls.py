@@ -19,7 +19,7 @@ from django.urls import path,include
 from django.contrib.auth import views as auth_views
 from django.contrib.sitemaps.views import sitemap
 from products.sitemaps import ProductSitemap, CategorySitemap, StaticViewSitemap
-
+from django.views.generic import TemplateView
 
 sitemaps = {
     'products': ProductSitemap,
@@ -38,6 +38,7 @@ urlpatterns = [
     path('', include('orders.urls')),
     path('', include('agents.urls')),
     path('', include('customers.urls')),
+    path('terms/', TemplateView.as_view(template_name='terms.html'), name='terms'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('password-reset/', auth_views.PasswordResetView.as_view(
         template_name='registration/password_reset_form.html',

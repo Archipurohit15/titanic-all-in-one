@@ -61,10 +61,10 @@
         </div>
 
         <div class="sbc-card sbc-groceries">
-            <h3>Tools</h3>
-            <div class="sbc-img"><img src="{% static 'products/tools.png' %}" alt="Tools"></div>
-            {% if featured_categories.tools %}
-            <a href="{% url 'category_detail' featured_categories.tools.id %}" class="sbc-btn">Shop Tools <i class="ti ti-arrow-right"></i></a>
+            <h3>Big Deals</h3>
+            <div class="sbc-img"><img src="{% static 'products/bigdeals.png' %}" alt="BIG DEALS"></div>
+            {% if featured_categories.bigdeals %}
+            <a href="{% url 'category_detail' featured_categories.bigdeals.id %}" class="sbc-btn">Shop Big Deals <i class="ti ti-arrow-right"></i></a>
             {% endif %}
         </div>
 

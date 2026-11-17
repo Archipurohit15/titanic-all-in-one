@@ -10,7 +10,6 @@ import segno
 from django.contrib.auth.decorators import login_required
 from django_ratelimit.decorators import ratelimit
 from products.models import Product
-from agents.models import Agent
 from .models import Order, OrderItem
 from .utils import calculate_distance_km
 
@@ -169,14 +168,11 @@ def checkout(request):
     else:
         order_min_days = order_max_days = None
 
-    agents = Agent.objects.filter(is_approved=True)
-
     if request.method == 'POST':
         full_name = request.POST.get('full_name')
         phone = request.POST.get('phone')
         address = request.POST.get('address')
         pincode = request.POST.get('pincode')
-        agent_id = request.POST.get('agent')
         lat = request.POST.get('lat')
         lng = request.POST.get('lng')
 
@@ -196,7 +192,7 @@ def checkout(request):
             for e in errors:
                 messages.error(request, e)
             return render(request, 'orders/checkout.html', {
-                'items': items, 'total': total, 'agents': agents, 'customer': customer,
+                'items': items, 'total': total, 'customer': customer,
                 'store_lat': str(settings.STORE_LATITUDE),
                 'store_lng': str(settings.STORE_LONGITUDE),
                 'order_min_days': order_min_days, 'order_max_days': order_max_days,
@@ -204,9 +200,10 @@ def checkout(request):
 
         distance_km = calculate_distance_km(lat, lng)
 
-        agent = None
-        if agent_id:
-            agent = get_object_or_404(Agent, id=agent_id)
+        # The agent is fixed at signup. Only an approved agent earns commission.
+        agent = customer.referred_by
+        if agent is not None and not agent.is_approved:
+            agent = None
 
         convenience_charge = 0
         if distance_km is not None and distance_km > 5:
@@ -238,7 +235,6 @@ def checkout(request):
     return render(request, 'orders/checkout.html', {
         'items': items,
         'total': total,
-        'agents': agents,
         'customer': customer,
         'store_lat': str(settings.STORE_LATITUDE),
         'store_lng': str(settings.STORE_LONGITUDE),

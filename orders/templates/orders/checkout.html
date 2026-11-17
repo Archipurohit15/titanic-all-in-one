@@ -69,15 +69,11 @@
              </p>
  
 
-            <div style="margin-bottom:4px;">
-                <label style="display:block; font-size:13px; font-weight:600; margin-bottom:6px;">Referred by agent (optional)</label>
-                <select name="agent" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px;">
-                    <option value="">-- Select agent (if any) --</option>
-                    {% for agent in agents %}
-                        <option value="{{ agent.id }}">{{ agent.name }} ({{ agent.referral_code }})</option>
-                    {% endfor %}
-                </select>
-            </div>
+            {% if customer.referred_by %}
+            <p style="font-size:12.5px; color:#9A8A7C; margin-bottom:4px;">
+                Referred by agent: <strong>{{ customer.referred_by.name }}</strong>
+            </p>
+            {% endif %}
         </div>
 
         <!-- Right: order summary -->

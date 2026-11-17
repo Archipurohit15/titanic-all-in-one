@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Customer
 from .forms import CustomerSignupForm
+from agents.models import Agent
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.conf import settings
 from django_ratelimit.decorators import ratelimit
@@ -17,7 +18,10 @@ def customer_signup(request):
 
             if User.objects.filter(username=email).exists():
                 messages.error(request, 'Is email se pehle se account bana hua hai.')
-                return render(request, 'customers/signup.html', {'form': form})
+                return render(request, 'customers/signup.html', {
+                    'form': form,
+                    'agents': Agent.objects.filter(is_approved=True).order_by('name'),
+                })
 
             user = User.objects.create_user(
                 username=email,
@@ -29,14 +33,22 @@ def customer_signup(request):
                 user=user,
                 name=form.cleaned_data['name'],
                 phone=form.cleaned_data['phone'],
+                referred_by=form.cleaned_data['referring_agent'],
             )
 
             login(request, user)
             return redirect('customer_dashboard')
+
+        for field_errors in form.errors.values():
+            for err in field_errors:
+                messages.error(request, err)
     else:
         form = CustomerSignupForm()
 
-    return render(request, 'customers/signup.html', {'form': form})
+    return render(request, 'customers/signup.html', {
+        'form': form,
+        'agents': Agent.objects.filter(is_approved=True).order_by('name'),
+    })
 
 
 @ratelimit(key='post:email', rate='5/m', block=True)

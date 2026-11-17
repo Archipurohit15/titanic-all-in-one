@@ -5,4 +5,6 @@ from .models import Customer
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'phone', 'created_at')
+    list_display = ('name', 'phone', 'referred_by', 'created_at')
+    list_filter = ('referred_by',)
+    search_fields = ('name', 'phone')

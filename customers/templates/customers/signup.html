@@ -54,7 +54,7 @@
                     <label>Full Name</label>
                     <div class="input-icon-wrap">
                         <i class="ti ti-user"></i>
-                        <input type="text" name="name" placeholder="Enter your full name" required>
+                        <input type="text" name="name" value="{{ request.POST.name }}" placeholder="Enter your full name" required>
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
                     <label>Phone Number</label>
                     <div class="input-icon-wrap">
                         <i class="ti ti-phone"></i>
-                        <input type="text" name="phone" placeholder="Enter your phone number" required>
+                        <input type="text" name="phone" value="{{ request.POST.phone }}" placeholder="Enter your phone number" required>
                     </div>
                 </div>
 
@@ -70,7 +70,7 @@
                     <label>Email</label>
                     <div class="input-icon-wrap">
                         <i class="ti ti-mail"></i>
-                        <input type="email" name="email" placeholder="Enter your email" required>
+                        <input type="email" name="email" value="{{ request.POST.email }}" placeholder="Enter your email" required>
                     </div>
                 </div>
 
@@ -80,6 +80,30 @@
                         <i class="ti ti-lock"></i>
                         <input type="password" name="password" placeholder="Create a password" required>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Referred by an agent? (optional)</label>
+                    <div class="input-icon-wrap">
+                        <i class="ti ti-users"></i>
+                        <select name="agent">
+                            <option value="">-- Select agent (if any) --</option>
+                            {% for agent in agents %}
+                                <option value="{{ agent.id }}" {% if request.POST.agent == agent.id|stringformat:"s" %}selected{% endif %}>{{ agent.name }} ({{ agent.referral_code }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Or enter agent referral code</label>
+                    <div class="input-icon-wrap">
+                        <i class="ti ti-ticket"></i>
+                        <input type="text" name="referral_code" value="{{ request.POST.referral_code }}" placeholder="e.g. AG123456">
+                    </div>
+                    <!-- <small style="display:block; margin-top:6px; color:#9A8A7C; font-size:12px;">
+                        Ek baar choose karne ke baad agent change nahi hoga. Aapke saare orders ka commission usi agent ko milega.
+                    </small> -->
                 </div>
 
                 <button type="submit" class="signup-btn">

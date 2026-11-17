@@ -5,7 +5,7 @@ def featured_categories(request):
     return {
         'featured_categories': {
             'industrial': Categories.objects.filter(parent=None, name__in=['Industrial', 'FMCG', 'Fmcg', 'Personal Care & Household']).first(),
-            'tools': Categories.objects.filter(parent=None, name__in=['Tools', 'Groceries', 'Grocery']).first(),
+            'bigdeals': Categories.objects.filter(parent=None, name__iregex=r'^big ?deals?$').first(),
             'electronics': Categories.objects.filter(parent=None, name__in=['Electronics']).first(),
             'electricals': Categories.objects.filter(parent=None, name__in=['Electrical', 'Electricals']).first(),
         }
